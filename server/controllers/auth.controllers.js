@@ -60,3 +60,8 @@ export const logout = (req, res) => {
     })
     return res.sendStatus(200);
 };
+
+export const profile = (req, res) => {
+    console.log(req.user);
+    res.send('profile');
+}
