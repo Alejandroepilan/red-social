@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
-    const { register, handleSubmit } = useForm();
-    const { signup, isAuthenticated } = useAuth();
+    const { register, handleSubmit, formState: { errors }, } = useForm();
+    const { signup, isAuthenticated, errors: registerErrors } = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -16,32 +16,52 @@ const RegisterPage = () => {
         signup(values);
     });
 
+
     return (
         <div className="h-screen flex flex-col items-center justify-center">
             <div className='bg-gray-800 max-w-md p-10 rounded-md'>
+
+                {
+                    registerErrors.map((error, i) => (
+                        <div className='bg-red-500 p-2' key={i}>
+                            {error}
+                        </div>
+                    ))
+                }
+
                 <form onSubmit={onSubmit}>
                     <div className='w-full mb-4'>
-                        <a className=' text-2xl'>Crea una cuenta</a>
+                        <a className=' text-2xl font-bold'>Crea una cuenta</a>
                     </div>
                     <input type='text' {... register("username", { required: true })}
-                        className='w-full bg-gray-700 text-white px-4 py-2 rounded-md my-2 outline-none'
+                        className={`${errors.username && ('border-2 border-red-600')} w-full bg-gray-700 text-white px-4 py-2 rounded-md my-2 outline-none`}
                         placeholder='Nombre de usuario'
                     />
+                    {
+                        errors.username && (<p className=' text-red-600 text-sm ml-1'>Nombre de usuario requerido.</p>)
+                    }
+
                     <input type='email' {... register("email", { required: true })}
-                        className='w-full bg-gray-700 text-white px-4 py-2 rounded-md my-2 outline-none'
-                        placeholder='Correo'
+                        className={`${errors.email && ('border-2 border-red-600')} w-full bg-gray-700 text-white px-4 py-2 rounded-md my-2 outline-none`}
+                        placeholder='Correo electrónico'
                     />
+                    {
+                        errors.email && (<p className=' text-red-600 text-sm ml-1'>Correo electrónico requerido.</p>)
+                    }
+
                     <input type='password' {... register("password", { required: true })}
-                        className='w-full bg-gray-700 text-white px-4 py-2 rounded-md my-2 outline-none'
+                        className={`${errors.password && ('border-2 border-red-600')} w-full bg-gray-700 text-white px-4 py-2 rounded-md my-2 outline-none`}
                         placeholder='Contraseña'
                     />
+                    {errors.password && (<p className=' text-red-600 text-sm ml-1'>Contraseña requerida.</p>)}
+
                     <button type='submit'
-                        className='w-full bg-gray-700 outline-none rounded-md py-2 my-2 focus:bg-gray-600'
+                        className='w-full bg-sky-700 outline-none rounded-md py-2 my-2 focus:bg-sky-800'
                     >Registrarse</button>
 
-                    <div className='mt-8'>
+                    <div className='mt-6'>
                         <span>¿Ya tienes una cuenta? </span>
-                        <Link to="/login" className='focus:text-gray-600 text-gray-500 outline-none'>
+                        <Link to="/login" className='focus:text-sky-700 text-sky-600 outline-none'>
                             Iniciar sesión
                         </Link>
                     </div>
