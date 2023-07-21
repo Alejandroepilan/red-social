@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
+//import { Navbar } from "../components/Navbar";
+import { Sidebar } from "../components/Sidebar";
 
 const HomePage = () => {
-    return (
-        <div className='flex flex-col items-center justify-center'>
-            <span className='text-2xl'>Inicio</span>
+  return (
+    <div className="flex h-screen">
+      <Sidebar />
 
-            <div className='bg-white max-w-md h-96 rounded-md'>
-                <input type='text' className='w-full rounded-md text-black border-2 border-gray-200 shadow-md p-2 m-5 outline-none'/>
-            </div>
-        </div>
-    );
-}
+      <div className="flex-initial text-black">Inicio</div>
+    </div>
+  );
+};
 
 export default HomePage;

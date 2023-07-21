@@ -2,11 +2,12 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
 
 const ProtectedRoute = () => {
-    const { user, isAuthenticated } = useAuth()
+    const { loading, isAuthenticated } = useAuth();
 
-    if (!isAuthenticated) return <Navigate to='/login' replace />
+    if (loading) return <></>; // Para que al cargar no se vea la pagina, sin estar logeado
+    if (!loading && !isAuthenticated) return <Navigate to='/login' replace />;
 
     return <Outlet/>;
-}
+};
 
 export default ProtectedRoute;
