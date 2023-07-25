@@ -7,7 +7,7 @@ const HomePage = () => {
     <div className="flex h-screen">
       <Sidebar />
 
-      <div className="flex-initial text-black">Inicio</div>
+      <div className="text-black">Inicio</div>
     </div>
   );
 };
