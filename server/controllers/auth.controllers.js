@@ -95,3 +95,23 @@ export const verifyToken = async (req, res) => {
         });
     });
 };
+
+export const postMessage = async (req, res) => {
+    const { message } = req.body;
+    const userFound = await User.findById(req.user.id);
+    const userSender =  userFound.username
+
+    try {
+        const newMessage = new Message({
+            userSender,
+            message,
+        });
+    
+        const messageSaved = await newMessage.save();
+
+        return res.json({message})
+    } catch (error) {
+        return res.json({error})        
+    }
+
+}

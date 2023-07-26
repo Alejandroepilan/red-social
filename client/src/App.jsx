@@ -7,6 +7,8 @@ import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import NotFoundPage from "./pages/NotFoundPage";
 
+import TestPage from "./pages/TestPage";
+
 import ProtectedRoute from "./ProtectedRoute";
 
 const App = () => {
@@ -14,6 +16,8 @@ const App = () => {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
+          <Route path="/test" element={<TestPage />} />
+
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="*" element={<NotFoundPage />} />
