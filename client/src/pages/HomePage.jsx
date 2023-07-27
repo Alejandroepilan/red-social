@@ -23,6 +23,8 @@ const HomePage = () => {
       <Sidebar />
 
       <div className="flex justify-center text-black w-5/6 ml-auto">
+        <button className="w-10 h-5 bg-blue-400">+</button>
+
         <div className="my-24 max-w-sm">
           {messages.map((message) => (
             <div
@@ -33,7 +35,11 @@ const HomePage = () => {
                 <img src={avatarUrl + message.user + ".svg"} />
               </div>
               <div className="font-bold">{message.user}</div>
-              <span>{message.text}</span>
+              <div>{message.text}</div>
+              <div className="mt-2">
+                {message.likes} - {message.liked}
+              </div>
+              <div className="mt-5 text-xs">{message.createdAt}</div>
             </div>
           ))}
         </div>
