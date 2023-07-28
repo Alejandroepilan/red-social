@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { getMessages } from "../api/message";
+import { getMessages, sendNewPost } from "../api/message";
 
 export const MessageContext = createContext();
 
@@ -24,11 +24,20 @@ export const MessageProvider = ({ children }) => {
     }
   };
 
+  const newPost = async (content) => {
+    try {
+      const res = await sendNewPost(content);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <MessageContext.Provider
       value={{
         verMessages,
         messages,
+        newPost,
       }}
     >
       {children}

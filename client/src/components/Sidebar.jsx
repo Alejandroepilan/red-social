@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  ArrowLeftOnRectangleIcon,
-  HomeIcon,
-  UserCircleIcon,
-} from "@heroicons/react/20/solid";
+  faCircleUser,
+  faHouse,
+  faPowerOff,
+} from "@fortawesome/free-solid-svg-icons";
 
 export function Sidebar() {
   const { user, logout } = useAuth();
@@ -16,7 +17,7 @@ export function Sidebar() {
     <>
       <aside
         id="default-sidebar"
-        className="fixed flex-initial top-0 left-0 z-40 w-1/6 h-screen transition-transform -translate-x-full sm:translate-x-0"
+        className="fixed flex-initial top-0 left-0 w-1/6 h-screen transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidenav"
       >
         <div className="overflow-y-auto py-5 px-3 h-full bg-white border-r border-gray-200">
@@ -36,7 +37,8 @@ export function Sidebar() {
                 to={"/"}
                 className="flex items-center cursor-pointer p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 group"
               >
-                <HomeIcon
+                <FontAwesomeIcon
+                  icon={faHouse}
                   className=" h-5 w-5 text-gray-400"
                   aria-hidden="true"
                 />
@@ -48,9 +50,9 @@ export function Sidebar() {
                 to={"/profile"}
                 className="flex items-center cursor-pointer p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 group"
               >
-                <UserCircleIcon
+                <FontAwesomeIcon
+                  icon={faCircleUser}
                   className=" h-5 w-5 text-gray-400"
-                  aria-hidden="true"
                 />
                 <span className="ml-3">Perfil</span>
               </Link>
@@ -65,7 +67,8 @@ export function Sidebar() {
                 }}
                 className="flex items-center cursor-pointer p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 group"
               >
-                <ArrowLeftOnRectangleIcon
+                <FontAwesomeIcon
+                  icon={faPowerOff}
                   className=" h-5 w-5 text-gray-400"
                   aria-hidden="true"
                 />
