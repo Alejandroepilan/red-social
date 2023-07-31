@@ -1,10 +1,10 @@
 import React from "react";
-import { Sidebar } from "../components/Sidebar";
+import Sidebar from "../components/Sidebar";
 import { useAuth } from "../context/AuthContext";
 import "./ProfilePage.css";
 
 const ProfilePage = () => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
 
   var avatarUrl = "https://api.multiavatar.com/" + user.username + ".svg";
 

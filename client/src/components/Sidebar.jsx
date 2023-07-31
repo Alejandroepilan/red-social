@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,11 +8,10 @@ import {
   faPowerOff,
 } from "@fortawesome/free-solid-svg-icons";
 
-export function Sidebar() {
+const Sidebar = () => {
   const { user, logout } = useAuth();
 
   var avatarUrl = "https://api.multiavatar.com/" + user.username + ".svg";
-
   return (
     <>
       <aside
@@ -47,7 +46,7 @@ export function Sidebar() {
             </li>
             <li>
               <Link
-                to={"/profile"}
+                to={`/u/${user.username}`}
                 className="flex items-center cursor-pointer p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 group"
               >
                 <FontAwesomeIcon
@@ -80,4 +79,6 @@ export function Sidebar() {
       </aside>
     </>
   );
-}
+};
+
+export default Sidebar;

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getProfile } from "../api/profile";
-import { useAuth } from "../context/AuthContext";
-import { Sidebar } from "./Sidebar";
+import Sidebar from "../components/Sidebar";
 import "../pages/ProfilePage.css";
 
 const UserProfile = () => {
