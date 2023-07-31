@@ -6,7 +6,6 @@ export const getUserProfile = async (req, res) => {
 
     try {
       const user = await User.findOne({ username }).select('-password');
-      console.log(user)
   
       if (!user) {
         return res.status(404).json({ error: 'Usuario no encontrado' });
@@ -16,6 +15,7 @@ export const getUserProfile = async (req, res) => {
       const userProfile = {
         _id: user._id,
         username: user.username,
+        createdAt: user.createdAt,
         // Agrega aquí otros campos relevantes para el perfil
       };
   
