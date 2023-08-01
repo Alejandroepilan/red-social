@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
 import authRoutes from './routes/auth.routes.js';
-import messageRoutes from "./routes/message.routes.js"
+import postRoutes from "./routes/post.routes.js"
 import profileRoutes from "./routes/profile.routes.js"
 
 const app = express();
@@ -17,6 +17,6 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/api", authRoutes, messageRoutes, profileRoutes);
+app.use("/api", authRoutes, postRoutes, profileRoutes);
 
 export default app;

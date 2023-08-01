@@ -3,11 +3,11 @@ import { useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
-import { useMessage } from "../context/MessageContext";
+import { usePosts } from "../context/PostsContext";
 
 const NewPostBoton = () => {
   const { register, handleSubmit } = useForm();
-  const { newPost } = useMessage();
+  const { newPost } = usePosts();
   let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {

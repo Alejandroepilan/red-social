@@ -6,6 +6,7 @@ import {
   faCircleUser,
   faHouse,
   faPowerOff,
+  faCommentDots,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Sidebar = () => {
@@ -38,7 +39,7 @@ const Sidebar = () => {
               >
                 <FontAwesomeIcon
                   icon={faHouse}
-                  className=" h-5 w-5 text-gray-400"
+                  className=" h-5 w-5 text-black"
                   aria-hidden="true"
                 />
                 <span className="ml-3">Inicio</span>
@@ -51,9 +52,21 @@ const Sidebar = () => {
               >
                 <FontAwesomeIcon
                   icon={faCircleUser}
-                  className=" h-5 w-5 text-gray-400"
+                  className=" h-5 w-5 text-black"
                 />
                 <span className="ml-3">Perfil</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={`/chats`}
+                className="flex items-center cursor-pointer p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 group"
+              >
+                <FontAwesomeIcon
+                  icon={faCommentDots}
+                  className=" h-5 w-5 text-black"
+                />
+                <span className="ml-3">Chats</span>
               </Link>
             </li>
           </ul>
@@ -68,7 +81,7 @@ const Sidebar = () => {
               >
                 <FontAwesomeIcon
                   icon={faPowerOff}
-                  className=" h-5 w-5 text-gray-400"
+                  className=" h-5 w-5 text-black"
                   aria-hidden="true"
                 />
                 <span className="ml-3">Cerrar sesión</span>

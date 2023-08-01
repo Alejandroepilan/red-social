@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const messageSchema = new mongoose.Schema({
+const postSchema = new mongoose.Schema({
     user: {
         type: String,
         required: true,
@@ -23,4 +23,4 @@ const messageSchema = new mongoose.Schema({
     timestamps: true
 })
 
-export default mongoose.model('Message', messageSchema)
+export default mongoose.model('Post', postSchema)

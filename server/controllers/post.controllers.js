@@ -1,5 +1,5 @@
 import User from '../models/user.model.js';
-import Message from '../models/message.model.js';
+import Post from '../models/post.model.js';
 
 export const createPost = async (req, res) => {
     const { text } = req.body;
@@ -7,7 +7,7 @@ export const createPost = async (req, res) => {
     const user =  userFound.username
 
     try {
-        const newPost = new Message({
+        const newPost = new Post({
             user,
             text,
         });
@@ -21,9 +21,8 @@ export const createPost = async (req, res) => {
 
 }
 
-export const getMessages = async (req, res) => {
-    const messages = await Message.find()
+export const getPosts = async (req, res) => {
+    const posts = await Post.find()
 
-    return res.json({messages}) 
-
+    return res.json({posts})
 }

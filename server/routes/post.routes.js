@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { authRequired } from '../middlewares/validateToken.js';
-import { createPost, getMessages } from "../controllers/message.controllers.js"
+import { createPost, getPosts } from "../controllers/post.controllers.js"
 
 const router = Router();
 
 router.post('/create-post', authRequired, createPost)
-router.get('/get-messages', authRequired, getMessages)
+router.get('/get-posts', authRequired, getPosts)
 
 export default router;

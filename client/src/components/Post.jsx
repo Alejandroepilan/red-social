@@ -1,41 +1,44 @@
 import React, { useEffect } from "react";
-import { useMessage } from "../context/MessageContext";
+import { Link } from "react-router-dom";
+import { usePosts } from "../context/PostsContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCertificate, faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faCircleCheck, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 
 const Post = () => {
-  const { messages, verMessages } = useMessage();
+  const { posts, verPosts } = usePosts();
 
   var avatarUrl = "https://api.multiavatar.com/";
 
   useEffect(() => {
-    verMessages();
+    verPosts();
   }, []);
 
   return (
     <>
       <div className="my-24 max-w-sm">
-        {messages.map((message) => (
+        {posts.map((post) => (
           <div
             className="ring-1 ring-gray-50 shadow-md rounded-lg py-10 mb-10"
-            key={message._id}
+            key={post._id}
           >
-            <div className="w-10">
-              <img src={avatarUrl + message.user + ".svg"} />
-            </div>
-            <div className="font-bold">
-              {message.user}
-              <FontAwesomeIcon
-                icon={faCertificate}
-                className="text-cyan-400 ml-1"
-              />
-            </div>
-            <div>{message.text}</div>
+            <Link to={`/u/${post.user}`} className=" hover:underline">
+              <div className="w-10">
+                <img src={avatarUrl + post.user + ".svg"} />
+              </div>
+              <div className="font-bold">
+                {post.user}
+                <FontAwesomeIcon
+                  icon={faCircleCheck}
+                  className="text-cyan-400 ml-1"
+                />
+              </div>
+            </Link>
+            <div>{post.text}</div>
             <div className="mt-2">
-              {message.likes}
+              {post.likes}
 
-              {message.liked ? (
+              {post.liked ? (
                 <FontAwesomeIcon icon={faHeart} className="text-red-500 ml-1" />
               ) : (
                 <FontAwesomeIcon
@@ -44,7 +47,7 @@ const Post = () => {
                 />
               )}
             </div>
-            <div className="mt-5 text-xs">{message.createdAt}</div>
+            <div className="mt-5 text-xs">{post.createdAt}</div>
           </div>
         ))}
       </div>
