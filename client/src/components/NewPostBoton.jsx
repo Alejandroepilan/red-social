@@ -29,9 +29,9 @@ const NewPostBoton = () => {
         <button
           type="button"
           onClick={openModal}
-          className="rounded-full bg-black px-5 py-2 text-white hover:bg-opacity-70 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+          className="rounded-full bg-yellow-400 px-5 py-2 text-white hover:bg-yellow-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
         >
-          <FontAwesomeIcon icon={faPen} className="text-white" />
+          <FontAwesomeIcon icon={faPen} className="text-neutral-900" />
         </button>
       </div>
 

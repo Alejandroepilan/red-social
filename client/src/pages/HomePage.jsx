@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
 import NewPostBoton from "../components/NewPostBoton";
-import Post from "../components/Post";
+import Posts from "../components/Posts";
 
 const HomePage = () => {
   return (
@@ -10,7 +10,7 @@ const HomePage = () => {
 
       <div className="flex justify-center text-black w-5/6 ml-auto">
         <NewPostBoton />
-        <Post />
+        <Posts />
       </div>
     </div>
   );

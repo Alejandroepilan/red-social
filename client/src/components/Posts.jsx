@@ -16,7 +16,7 @@ const Post = () => {
 
   return (
     <>
-      <div className="my-24 max-w-sm">
+      <div className="my-24 max-w-sm min-w-[300px] text-neutral-200">
         {posts.map((post) => (
           <div
             className="ring-1 ring-gray-50 shadow-md rounded-lg py-10 mb-10"

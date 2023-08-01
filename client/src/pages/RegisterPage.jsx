@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
 import { useEffect } from "react";
@@ -22,7 +23,7 @@ const RegisterPage = () => {
 
   return (
     <div className="h-screen flex flex-col items-center justify-center">
-      <div className="bg-gray-800 max-w-md p-10 rounded-md">
+      <div className="bg-neutral-800 max-w-md p-10 rounded-md">
         {registerErrors.map((error, i) => (
           <div className="bg-red-500 p-2" key={i}>
             {error}
@@ -38,7 +39,7 @@ const RegisterPage = () => {
             {...register("username", { required: true })}
             className={`${
               errors.username && "border-2 border-red-600"
-            } w-full bg-gray-700 text-white px-4 py-2 rounded-md my-2 outline-none`}
+            } w-full bg-neutral-700 text-white px-4 py-2 rounded-md my-2 outline-none`}
             placeholder="Nombre de usuario"
           />
           {errors.username && (
@@ -52,7 +53,7 @@ const RegisterPage = () => {
             {...register("email", { required: true })}
             className={`${
               errors.email && "border-2 border-red-600"
-            } w-full bg-gray-700 text-white px-4 py-2 rounded-md my-2 outline-none`}
+            } w-full bg-neutral-700 text-white px-4 py-2 rounded-md my-2 outline-none`}
             placeholder="Correo electrónico"
           />
           {errors.email && (
@@ -66,7 +67,7 @@ const RegisterPage = () => {
             {...register("password", { required: true })}
             className={`${
               errors.password && "border-2 border-red-600"
-            } w-full bg-gray-700 text-white px-4 py-2 rounded-md my-2 outline-none`}
+            } w-full bg-neutral-700 text-white px-4 py-2 rounded-md my-2 outline-none`}
             placeholder="Contraseña"
           />
           {errors.password && (
@@ -75,7 +76,7 @@ const RegisterPage = () => {
 
           <button
             type="submit"
-            className="w-full bg-sky-700 outline-none rounded-md py-2 my-2 focus:bg-sky-800"
+            className="w-full bg-yellow-500 outline-none rounded-md py-2 my-2 hover:bg-yellow-600"
           >
             Registrarse
           </button>
@@ -84,7 +85,7 @@ const RegisterPage = () => {
             <span>¿Ya tienes una cuenta? </span>
             <Link
               to="/login"
-              className="focus:text-sky-700 text-sky-600 outline-none"
+              className="text-yellow-500 outline-none hover:text-yellow-600 hover:underline"
             >
               Iniciar sesión
             </Link>
