@@ -22,12 +22,15 @@ const Post = () => {
             className="ring-1 ring-gray-50 shadow-md rounded-lg py-10 mb-10"
             key={post._id}
           >
-            <Link to={`/u/${post.user}`} className=" hover:underline">
+            <Link
+              to={`/u/${post.userId.username}`}
+              className=" hover:underline"
+            >
               <div className="w-10">
-                <img src={avatarUrl + post.user + ".svg"} />
+                <img src={avatarUrl + post.userId.username + ".svg"} />
               </div>
               <div className="font-bold">
-                {post.user}
+                {post.userId.username}
                 <FontAwesomeIcon
                   icon={faCircleCheck}
                   className="text-cyan-400 ml-1"
@@ -36,6 +39,25 @@ const Post = () => {
             </Link>
             <div>{post.text}</div>
             <div className="mt-2">
+              {post.likes.length}
+
+              <FontAwesomeIcon
+                icon={faHeartRegular}
+                className="text-red-500 ml-1"
+              />
+            </div>
+            <div className="mt-5 text-xs">{post.createdAt}</div>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+};
+
+export default Post;
+
+/*
+<div className="mt-2">
               {post.likes}
 
               {post.liked ? (
@@ -47,12 +69,4 @@ const Post = () => {
                 />
               )}
             </div>
-            <div className="mt-5 text-xs">{post.createdAt}</div>
-          </div>
-        ))}
-      </div>
-    </>
-  );
-};
-
-export default Post;
+*/
