@@ -1,18 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import { usePosts } from "../context/PostsContext";
+import { darLike, quitarLike } from "../api/posts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 
 const Post = () => {
+  const { user } = useAuth();
   const { posts, verPosts } = usePosts();
+  const [visualLike, setVisualLike] = useState(0);
+  const [likesState, setLikesState] = useState({});
 
   var avatarUrl = "https://api.multiavatar.com/";
 
   useEffect(() => {
     verPosts();
   }, []);
+
+  const handleLike = (publicacionId) => {
+    const newLikesState = { ...likesState };
+    newLikesState[publicacionId] = !newLikesState[publicacionId];
+    setLikesState(newLikesState);
+  };
+
+  const handleDarLike = (postId) => {
+    darLike(postId);
+    console.log(user.id);
+    //setVisualLike(+1);
+  };
+
+  const handleQuitarLike = (postId) => {
+    quitarLike(postId);
+    //setVisualLike(-1);
+  };
 
   return (
     <>
@@ -39,12 +61,23 @@ const Post = () => {
             </Link>
             <div>{post.text}</div>
             <div className="mt-2">
-              {post.likes.length}
+              {post.likes.length + visualLike}
 
-              <FontAwesomeIcon
-                icon={faHeartRegular}
-                className="text-red-500 ml-1"
-              />
+              {post.likes.some((userId) => userId === user.id) ? (
+                <button onClick={() => handleQuitarLike(post._id)}>
+                  <FontAwesomeIcon
+                    icon={faHeart}
+                    className="text-red-500 ml-1"
+                  />
+                </button>
+              ) : (
+                <button onClick={() => handleDarLike(post._id)}>
+                  <FontAwesomeIcon
+                    icon={faHeartRegular}
+                    className="text-red-500 ml-1"
+                  />
+                </button>
+              )}
             </div>
             <div className="mt-5 text-xs">{post.createdAt}</div>
           </div>

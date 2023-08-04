@@ -33,38 +33,41 @@ export const darLike = async (req, res) => {
   const userId = req.user.id;
 
   try {
-    const liked = Post.findOne({ likes: { $in: [userId] } }).then((isLiked) => {
+    Post.findOne({ likes: { $in: [userId] } }).then((isLiked) => {
       if (!isLiked) {
-        const postLiked = Post.findOneAndUpdate(
+        Post.findOneAndUpdate(
           { _id: postId },
           { $push: { likes: userId } }
         ).then(() => {
-          return;
+          return res.status(200).json("Liked!");
         });
       } else {
-        console.log("tiene like");
-        return;
+        return res.status(400).json("Ya tenia like");
       }
     });
-
-    console.log(liked);
   } catch (error) {
     console.error(error);
   }
-
-  return res.json({ message: "OK" });
 };
 
 export const quitarLike = async (req, res) => {
   const postId = req.params.postId;
+  const userId = req.user.id;
 
-  Post.findOneAndUpdate({ _id: postId }, { $pull: { likes: req.user.id } })
-    .then((postActualizado) => {
-      console.log(postActualizado);
-    })
-    .catch((error) => {
-      console.error(error);
+  try {
+    Post.findOne({ likes: { $in: [userId] } }).then((isLiked) => {
+      if (isLiked) {
+        Post.findOneAndUpdate(
+          { _id: postId },
+          { $pull: { likes: userId } }
+        ).then(() => {
+          return res.status(200).json("Unliked!");
+        });
+      } else {
+        return res.status(400).json("Ya no tenia like");
+      }
     });
-
-  return res.json({ message: "OK" });
+  } catch (error) {
+    console.error(error);
+  }
 };
