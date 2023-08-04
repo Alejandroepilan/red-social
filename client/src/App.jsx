@@ -47,7 +47,6 @@ export default App;
 
  - Estando logeado, al ir a las rutas (/login) y (/register), te devuelve a (/), pero se llegan a ver las paginas por unos instantes.
  - Los mensajes de error en las paginas (/login) y (/register), no desaparecen a los 5 segundos.
- - 
 
 
 */

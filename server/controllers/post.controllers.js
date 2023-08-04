@@ -33,7 +33,9 @@ export const darLike = async (req, res) => {
   const userId = req.user.id;
 
   try {
-    Post.findOne({ likes: { $in: [userId] } }).then((isLiked) => {
+    const postSelected = Post.findById(postId);
+
+    postSelected.findOne({ likes: { $in: [userId] } }).then((isLiked) => {
       if (!isLiked) {
         Post.findOneAndUpdate(
           { _id: postId },
@@ -55,7 +57,9 @@ export const quitarLike = async (req, res) => {
   const userId = req.user.id;
 
   try {
-    Post.findOne({ likes: { $in: [userId] } }).then((isLiked) => {
+    const postSelected = Post.findById(postId);
+
+    postSelected.findOne({ likes: { $in: [userId] } }).then((isLiked) => {
       if (isLiked) {
         Post.findOneAndUpdate(
           { _id: postId },
