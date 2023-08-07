@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { usePosts } from "../context/PostsContext";
 import { getProfile } from "../api/profile";
 import Sidebar from "../components/Sidebar";
 import Posts from "../components/Posts";
@@ -7,10 +9,14 @@ import "../pages/ProfilePage.css";
 
 const UserProfile = () => {
   const [userProfile, setUserProfile] = useState({});
+  const { user } = useAuth();
+  const { posts, verPosts } = usePosts();
   const { username } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
+    verPosts();
+
     const fetchUserProfile = async () => {
       try {
         const response = getProfile(username)
@@ -46,8 +52,15 @@ const UserProfile = () => {
         </div>
 
         <div className="flex flex-col justify-center my-24 text-neutral-200">
-          <span className="flex items-center justify-center">
-            @{userProfile.username}
+          <span className="flex flex-col items-center justify-center">
+            <div>@{userProfile.username}</div>
+            <div className="inline-block mt-4">
+              <div>10 Seguidores</div>
+
+              {posts.map((post) => (
+                <div>{post.userId.some((userId) => userId === user.id)}</div>
+              ))}
+            </div>
           </span>
           <div className="flex justify-center m-24">
             <Posts />
