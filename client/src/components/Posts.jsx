@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { formatDistanceToNow } from "date-fns";
+import { es } from "date-fns/locale";
 import { useAuth } from "../context/AuthContext";
 import { usePosts } from "../context/PostsContext";
 import { darLike, quitarLike } from "../api/posts";
@@ -7,13 +9,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 
-const Post = () => {
+const Post = (props) => {
   const { user } = useAuth();
   const { posts, verPosts } = usePosts();
   const [visualLike, setVisualLike] = useState(0);
   const [likesState, setLikesState] = useState({});
 
   var avatarUrl = "https://api.multiavatar.com/";
+
+  var postsSeleccionados = posts;
+
+  if (props.userSeleccionado) {
+    postsSeleccionados = posts.filter(
+      (post) => post.userId._id === props.userSeleccionado
+    );
+  }
 
   useEffect(() => {
     verPosts();
@@ -39,7 +49,7 @@ const Post = () => {
   return (
     <>
       <div className="my-24 max-w-sm min-w-[300px] text-neutral-200">
-        {posts.map((post) => (
+        {postsSeleccionados.map((post) => (
           <div
             className="ring-1 ring-gray-50 shadow-md rounded-lg py-10 mb-10"
             key={post._id}
@@ -52,7 +62,7 @@ const Post = () => {
                 <img src={avatarUrl + post.userId.username + ".svg"} />
               </div>
               <div className="font-bold">
-                {post.userId.username}
+                @{post.userId.username}
                 <FontAwesomeIcon
                   icon={faCircleCheck}
                   className="text-cyan-400 ml-1"
@@ -79,7 +89,12 @@ const Post = () => {
                 </button>
               )}
             </div>
-            <div className="mt-5 text-xs">{post.createdAt}</div>
+            <div className="mt-5 text-xs">
+              {formatDistanceToNow(new Date(post.createdAt), {
+                addSuffix: true,
+                locale: es,
+              })}
+            </div>
           </div>
         ))}
       </div>

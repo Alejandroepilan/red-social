@@ -5,6 +5,8 @@ import { usePosts } from "../context/PostsContext";
 import { getProfile } from "../api/profile";
 import Sidebar from "../components/Sidebar";
 import Posts from "../components/Posts";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import "../pages/ProfilePage.css";
 
 const UserProfile = () => {
@@ -38,6 +40,10 @@ const UserProfile = () => {
   var avatarUrl =
     "https://api.multiavatar.com/" + userProfile.username + ".svg";
 
+  const publicacionesDelUsuario = posts.filter(
+    (post) => post.userId._id === userProfile._id
+  );
+
   return (
     <div className="flex h-screen">
       <Sidebar />
@@ -53,17 +59,22 @@ const UserProfile = () => {
 
         <div className="flex flex-col justify-center my-24 text-neutral-200">
           <span className="flex flex-col items-center justify-center">
-            <div>@{userProfile.username}</div>
-            <div className="inline-block mt-4">
+            <div className="font-bold">
+              @{userProfile.username}
+              <FontAwesomeIcon
+                icon={faCircleCheck}
+                className="text-cyan-400 ml-1"
+              />
+            </div>
+            <div className="flex flex-colinline-block mt-4">
               <div>10 Seguidores</div>
-
-              {posts.map((post) => (
-                <div>{post.userId.some((userId) => userId === user.id)}</div>
-              ))}
+              <div className="ml-5">
+                {publicacionesDelUsuario.length} Publicaciones
+              </div>
             </div>
           </span>
           <div className="flex justify-center m-24">
-            <Posts />
+            <Posts userSeleccionado={userProfile._id} />
           </div>
         </div>
       </div>
