@@ -1,129 +1,51 @@
 import React from "react";
+import Dummy from "../components/Dummy";
+import Posts from "../components/Posts";
+import {
+  HomeIcon,
+  UserIcon,
+  BellAlertIcon,
+  Cog6ToothIcon,
+} from "@heroicons/react/24/outline";
 
 const TestPage = () => {
   return (
-    <div>
-      <div class="flex h-screen">
-        <div class="fixed bg-gray-800 h-full w-1/5">
-          <div class="p-4">
-            <h2 class="text-white text-xl font-bold mb-4">Sidebar</h2>
-            <ul class="text-white">
-              <li class="mb-2">
-                <a href="#" class="hover:text-blue-500">
-                  Enlace 1
-                </a>
+    <div className="flex flex-col h-screen overflow-hidden text-black">
+      <nav className="bg-white p-4 drop-shadow-sm">Navbar</nav>
+
+      <div className="flex flex-1 overflow-hidden">
+        <div className="w-1/4 p-8 overflow-y-auto">
+          <div className="bg-white mb-8 rounded-2xl p-4 drop-shadow-sm">
+            <ul>
+              <li className="flex p-3 my-2 cursor-pointer hover:bg-gray-50 rounded-2xl text-sky-500">
+                <HomeIcon className="h-6 w-6" />
+                <span className="pl-4">Inicio</span>
               </li>
-              <li class="mb-2">
-                <a href="#" class="hover:text-blue-500">
-                  Enlace 2
-                </a>
+              <li className="flex p-3 my-2 cursor-pointer hover:bg-gray-50 rounded-2xl">
+                <UserIcon className="h-6 w-6" />
+                <span className="pl-4">Perfil</span>
               </li>
-              <li class="mb-2">
-                <a href="#" class="hover:text-blue-500">
-                  Enlace 3
-                </a>
+              <li className="flex p-3 my-2 cursor-pointer hover:bg-gray-50 rounded-2xl">
+                <BellAlertIcon className="h-6 w-6" />
+                <span className="pl-4">Notificaciones</span>
               </li>
-              <li class="mb-2">
-                <a href="#" class="hover:text-blue-500">
-                  Enlace 4
-                </a>
+              <li className="flex p-3 my-2 cursor-pointer hover:bg-gray-50 rounded-2xl">
+                <Cog6ToothIcon className="h-6 w-6" />
+                <span className="pl-4">Ajustes</span>
               </li>
             </ul>
           </div>
         </div>
 
-        <div class="w-4/5 ml-auto">
-          <div class="p-8">
-            <h1 class="text-4xl font-bold mb-4">Título de la página</h1>
-            <p class="text-gray-800">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-              scelerisque quam ut risus laoreet, in congue odio blandit. Fusce
-              euismod elementum odio, nec vestibulum nunc facilisis eu. Integer
-              mollis massa quam, quis laoreet justo euismod sit amet. Duis
-              tincidunt fermentum purus, nec hendrerit arcu feugiat in. Duis
-              tristique at turpis vitae luctus.
-            </p>
-            <p class="text-gray-800">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-              scelerisque quam ut risus laoreet, in congue odio blandit. Fusce
-              euismod elementum odio, nec vestibulum nunc facilisis eu. Integer
-              mollis massa quam, quis laoreet justo euismod sit amet. Duis
-              tincidunt fermentum purus, nec hendrerit arcu feugiat in. Duis
-              tristique at turpis vitae luctus.
-            </p>
-            <p class="text-gray-800">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-              scelerisque quam ut risus laoreet, in congue odio blandit. Fusce
-              euismod elementum odio, nec vestibulum nunc facilisis eu. Integer
-              mollis massa quam, quis laoreet justo euismod sit amet. Duis
-              tincidunt fermentum purus, nec hendrerit arcu feugiat in. Duis
-              tristique at turpis vitae luctus.
-            </p>
-            <p class="text-gray-800">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-              scelerisque quam ut risus laoreet, in congue odio blandit. Fusce
-              euismod elementum odio, nec vestibulum nunc facilisis eu. Integer
-              mollis massa quam, quis laoreet justo euismod sit amet. Duis
-              tincidunt fermentum purus, nec hendrerit arcu feugiat in. Duis
-              tristique at turpis vitae luctus.
-            </p>
-            <p class="text-gray-800">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-              scelerisque quam ut risus laoreet, in congue odio blandit. Fusce
-              euismod elementum odio, nec vestibulum nunc facilisis eu. Integer
-              mollis massa quam, quis laoreet justo euismod sit amet. Duis
-              tincidunt fermentum purus, nec hendrerit arcu feugiat in. Duis
-              tristique at turpis vitae luctus.
-            </p>
-            <p class="text-gray-800">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-              scelerisque quam ut risus laoreet, in congue odio blandit. Fusce
-              euismod elementum odio, nec vestibulum nunc facilisis eu. Integer
-              mollis massa quam, quis laoreet justo euismod sit amet. Duis
-              tincidunt fermentum purus, nec hendrerit arcu feugiat in. Duis
-              tristique at turpis vitae luctus.
-            </p>
-            <p class="text-gray-800">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-              scelerisque quam ut risus laoreet, in congue odio blandit. Fusce
-              euismod elementum odio, nec vestibulum nunc facilisis eu. Integer
-              mollis massa quam, quis laoreet justo euismod sit amet. Duis
-              tincidunt fermentum purus, nec hendrerit arcu feugiat in. Duis
-              tristique at turpis vitae luctus.
-            </p>
-            <p class="text-gray-800">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-              scelerisque quam ut risus laoreet, in congue odio blandit. Fusce
-              euismod elementum odio, nec vestibulum nunc facilisis eu. Integer
-              mollis massa quam, quis laoreet justo euismod sit amet. Duis
-              tincidunt fermentum purus, nec hendrerit arcu feugiat in. Duis
-              tristique at turpis vitae luctus.
-            </p>
-            <p class="text-gray-800">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-              scelerisque quam ut risus laoreet, in congue odio blandit. Fusce
-              euismod elementum odio, nec vestibulum nunc facilisis eu. Integer
-              mollis massa quam, quis laoreet justo euismod sit amet. Duis
-              tincidunt fermentum purus, nec hendrerit arcu feugiat in. Duis
-              tristique at turpis vitae luctus.
-            </p>
-            <p class="text-gray-800">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-              scelerisque quam ut risus laoreet, in congue odio blandit. Fusce
-              euismod elementum odio, nec vestibulum nunc facilisis eu. Integer
-              mollis massa quam, quis laoreet justo euismod sit amet. Duis
-              tincidunt fermentum purus, nec hendrerit arcu feugiat in. Duis
-              tristique at turpis vitae luctus.
-            </p>
-            <p class="text-gray-800">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-              scelerisque quam ut risus laoreet, in congue odio blandit. Fusce
-              euismod elementum odio, nec vestibulum nunc facilisis eu. Integer
-              mollis massa quam, quis laoreet justo euismod sit amet. Duis
-              tincidunt fermentum purus, nec hendrerit arcu feugiat in. Duis
-              tristique at turpis vitae luctus.
-            </p>
-          </div>
+        <div className="flex-1 p-8 overflow-y-auto">
+          <Posts />
+        </div>
+
+        <div className="w-1/4 p-8 overflow-y-auto">
+          <Dummy />
+          <Dummy />
+          <Dummy />
+          <Dummy />
         </div>
       </div>
     </div>

@@ -48,10 +48,10 @@ const Post = (props) => {
 
   return (
     <>
-      <div className="my-24 max-w-sm min-w-[300px] text-neutral-200">
+      <div className="text-black">
         {postsSeleccionados.map((post) => (
           <div
-            className="ring-1 ring-gray-50 shadow-md rounded-lg py-10 mb-10"
+            className="bg-white drop-shadow-sm rounded-2xl p-8 mb-8"
             key={post._id}
           >
             <Link
