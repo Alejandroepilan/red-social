@@ -20,8 +20,6 @@ const App = () => {
       <PostsProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/test" element={<TestPage />} />
-
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="*" element={<NotFoundPage />} />
@@ -31,6 +29,8 @@ const App = () => {
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/u/:username" element={<UserProfile />} />
               <Route path="/chats" element={<ChatsPage />} />
+
+              <Route path="/test" element={<TestPage />} />
             </Route>
           </Routes>
         </BrowserRouter>

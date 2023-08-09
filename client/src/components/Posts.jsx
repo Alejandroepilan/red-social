@@ -51,49 +51,52 @@ const Post = (props) => {
       <div className="text-black">
         {postsSeleccionados.map((post) => (
           <div
-            className="bg-white drop-shadow-sm rounded-2xl p-8 mb-8"
+            className="bg-white drop-shadow-sm rounded-2xl p-6 mb-8"
             key={post._id}
           >
             <Link
               to={`/u/${post.userId.username}`}
-              className=" hover:underline"
+              className="flex hover:underline"
             >
-              <div className="w-10">
+              <div className=" w-10">
                 <img src={avatarUrl + post.userId.username + ".svg"} />
               </div>
-              <div className="font-bold">
+              <div className=" flex items-center pl-2">
                 @{post.userId.username}
                 <FontAwesomeIcon
                   icon={faCircleCheck}
-                  className="text-cyan-400 ml-1"
+                  className="text-yellow-400 ml-1"
                 />
               </div>
             </Link>
-            <div>{post.text}</div>
-            <div className="mt-2">
-              {post.likes.length + visualLike}
+            <div className="py-8">{post.text}</div>
+            <div className="flex">
+              <div className="">
+                {post.likes.length + visualLike}
 
-              {post.likes.some((userId) => userId === user.id) ? (
-                <button onClick={() => handleQuitarLike(post._id)}>
-                  <FontAwesomeIcon
-                    icon={faHeart}
-                    className="text-red-500 ml-1"
-                  />
-                </button>
-              ) : (
-                <button onClick={() => handleDarLike(post._id)}>
-                  <FontAwesomeIcon
-                    icon={faHeartRegular}
-                    className="text-red-500 ml-1"
-                  />
-                </button>
-              )}
-            </div>
-            <div className="mt-5 text-xs">
-              {formatDistanceToNow(new Date(post.createdAt), {
-                addSuffix: true,
-                locale: es,
-              })}
+                {post.likes.some((userId) => userId === user.id) ? (
+                  <button onClick={() => handleQuitarLike(post._id)}>
+                    <FontAwesomeIcon
+                      icon={faHeart}
+                      className="text-red-500 ml-1"
+                    />
+                  </button>
+                ) : (
+                  <button onClick={() => handleDarLike(post._id)}>
+                    <FontAwesomeIcon
+                      icon={faHeartRegular}
+                      className="text-red-500 ml-1"
+                    />
+                  </button>
+                )}
+              </div>
+              <div className="text-xs flex items-center">
+                <a className="px-2">•</a>
+                {formatDistanceToNow(new Date(post.createdAt), {
+                  addSuffix: true,
+                  locale: es,
+                })}
+              </div>
             </div>
           </div>
         ))}
