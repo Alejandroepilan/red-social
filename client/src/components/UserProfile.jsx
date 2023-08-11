@@ -3,11 +3,14 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { usePosts } from "../context/PostsContext";
 import { getProfile } from "../api/profile";
-import Sidebar from "../components/Sidebar";
-import Posts from "../components/Posts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import "../pages/ProfilePage.css";
+
+import Dummy from "../components/Dummy";
+import Posts from "../components/Posts";
+import Navbar from "../components/Navbar";
+import SidebarMenu from "../components/SidebarMenu";
 
 const UserProfile = () => {
   const [userProfile, setUserProfile] = useState({});
@@ -45,6 +48,48 @@ const UserProfile = () => {
   );
 
   return (
+    <div className="flex flex-col h-screen overflow-hidden text-black">
+      <Navbar />
+
+      <div className="flex flex-1 overflow-hidden">
+        <div className="w-1/4 px-8 overflow-y-auto">
+          <SidebarMenu />
+        </div>
+
+        <div className="flex-1 px-8 overflow-y-auto">
+          <div className="bg-white drop-shadow-sm rounded-2xl p-6 mb-8">
+            <div className="h-48 w-full rounded-2xl muro flex flex-col justify-end">
+              <div className="relative h-20 w-20 rounded-2xl mt-auto m-5">
+                <img className="" src={avatarUrl} />
+              </div>
+            </div>
+            <div className="text-black m-5">
+              @{userProfile.username}
+              <FontAwesomeIcon
+                icon={faCircleCheck}
+                className="text-yellow-400 ml-1 bg-white rounded-full"
+              />
+            </div>
+            <div className="flex flex-colinline-block m-5">
+              {/*<div>10 Seguidores</div>*/}
+              <div>{publicacionesDelUsuario.length} Publicaciones</div>
+            </div>
+          </div>
+
+          <Posts userSeleccionado={userProfile._id} />
+        </div>
+
+        <div className="w-1/4 px-8 overflow-y-auto">
+          <Dummy />
+          <Dummy />
+          <Dummy />
+          <Dummy />
+        </div>
+      </div>
+    </div>
+  );
+
+  /*return (
     <div className="flex h-screen">
       <Sidebar />
       <div className="w-5/6 ml-auto">
@@ -79,7 +124,7 @@ const UserProfile = () => {
         </div>
       </div>
     </div>
-  );
+  );*/
 };
 
 export default UserProfile;

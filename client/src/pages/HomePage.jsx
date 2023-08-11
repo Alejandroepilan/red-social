@@ -1,16 +1,29 @@
 import React from "react";
-import Sidebar from "../components/Sidebar";
-import NewPostBoton from "../components/NewPostBoton";
+import Dummy from "../components/Dummy";
 import Posts from "../components/Posts";
+import Navbar from "../components/Navbar";
+import SidebarMenu from "../components/SidebarMenu";
 
 const HomePage = () => {
   return (
-    <div className="flex h-screen">
-      <Sidebar />
+    <div className="flex flex-col h-screen overflow-hidden text-black">
+      <Navbar />
 
-      <div className="flex justify-center text-black w-5/6 ml-auto">
-        <NewPostBoton />
-        <Posts />
+      <div className="flex flex-1 overflow-hidden">
+        <div className="w-1/4 px-8 overflow-y-auto">
+          <SidebarMenu />
+        </div>
+
+        <div className="flex-1 px-8 overflow-y-auto">
+          <Posts />
+        </div>
+
+        <div className="w-1/4 px-8 overflow-y-auto">
+          <Dummy />
+          <Dummy />
+          <Dummy />
+          <Dummy />
+        </div>
       </div>
     </div>
   );

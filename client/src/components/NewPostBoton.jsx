@@ -1,9 +1,9 @@
 import React, { useState, Fragment } from "react";
 import { useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { PlusCircleIcon } from "@heroicons/react/24/outline";
 import { usePosts } from "../context/PostsContext";
+import "../pages/ProfilePage.css";
 
 const NewPostBoton = () => {
   const { register, handleSubmit } = useForm();
@@ -25,15 +25,14 @@ const NewPostBoton = () => {
 
   return (
     <>
-      <div className="fixed bottom-10 right-10">
-        <button
-          type="button"
-          onClick={openModal}
-          className="rounded-full bg-yellow-400 px-5 py-2 text-white hover:bg-yellow-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-        >
-          <FontAwesomeIcon icon={faPen} className="text-neutral-900" />
-        </button>
-      </div>
+      <button
+        type="button"
+        onClick={openModal}
+        className="flex items-center px-3 h-full bg-yellow-300 rounded-2xl hover:bg-yellow-400"
+      >
+        <PlusCircleIcon className="h-6 w-6" />
+        <a className="pl-1">Crear</a>
+      </button>
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-1000" onClose={closeModal}>
@@ -80,7 +79,7 @@ const NewPostBoton = () => {
                     <div className="mt-4">
                       <button
                         type="submit"
-                        className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                        className="inline-flex justify-center rounded-md border border-transparent bg-yellow-300 px-4 py-2 text-sm font-medium text-black hover:bg-yellow-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300 focus-visible:ring-offset-2"
                       >
                         Publicar
                       </button>
