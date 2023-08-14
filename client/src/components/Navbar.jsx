@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import NewPostBoton from "./NewPostBoton";
 import { useAuth } from "../context/AuthContext";
@@ -12,15 +13,19 @@ const Navbar = () => {
     <div>
       <nav className="grid grid-cols-3 bg-white py-4 px-6 mb-8 drop-shadow-sm shadow-sm">
         <div className="flex items-center justify-start">
-          <img src={viteLogo} />
-          <a className="flex items-center pl-2 font-bold">Red Social</a>
+          <Link to={"/"} className="flex items-center justify-start">
+            <img src={viteLogo} />
+            <a className="flex items-center pl-2 font-bold">Red Social</a>
+          </Link>
         </div>
-        <div className="relative flex items-center justify-center">
-          <MagnifyingGlassIcon className="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+        <div className="relative flex items-center justify-center mx-20">
+          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <MagnifyingGlassIcon className="h-5 w-5 absolute text-gray-400" />
+          </div>
           <input
-            type="text"
+            type="search"
+            class="block w-full bg-gray-50 rounded-2xl h-full px-4 pl-10 focus:outline-none"
             placeholder="Buscar"
-            className="bg-gray-50 rounded-2xl h-full px-4 pl-10 focus:outline-none"
           />
         </div>
         <div className="flex items-center justify-end">

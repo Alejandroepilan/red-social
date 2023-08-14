@@ -24,7 +24,7 @@ const LoginPage = () => {
 
   return (
     <div className="h-screen flex flex-col items-center justify-center">
-      <div className="bg-neutral-800 max-w-md p-10 rounded-md">
+      <div className="bg-white max-w-md p-10 rounded-md text-black">
         {loginErrors.map((error, i) => (
           <div className="bg-red-500 p-2" key={i}>
             {error}
@@ -41,7 +41,7 @@ const LoginPage = () => {
             {...register("email", { required: true })}
             className={`${
               errors.email && "border-2 border-red-600"
-            } w-full bg-neutral-700 text-white px-4 py-2 rounded-md my-2 outline-none`}
+            } w-full bg-gray-50  px-4 py-2 rounded-md my-2 outline-none`}
             placeholder="Correo electrónico"
           />
           {errors.email && (
@@ -55,7 +55,7 @@ const LoginPage = () => {
             {...register("password", { required: true })}
             className={`${
               errors.password && "border-2 border-red-600"
-            } w-full bg-neutral-700 text-white px-4 py-2 rounded-md my-2 outline-none`}
+            } w-full bg-gray-50  px-4 py-2 rounded-md my-2 outline-none`}
             placeholder="Contraseña"
           />
           {errors.password && (
@@ -64,7 +64,7 @@ const LoginPage = () => {
 
           <button
             type="submit"
-            className="w-full bg-yellow-500 outline-none rounded-md py-2 my-2 hover:bg-yellow-600"
+            className="w-full bg-yellow-400 outline-none rounded-md py-2 my-2 hover:bg-yellow-500"
           >
             Iniciar sesión
           </button>
@@ -73,7 +73,7 @@ const LoginPage = () => {
             <span>¿No tienes una cuenta? </span>
             <Link
               to="/register"
-              className="text-yellow-500 outline-none hover:text-yellow-600 hover:underline under"
+              className="text-yellow-400 outline-none hover:text-yellow-500 hover:underline under"
             >
               Regístrate
             </Link>

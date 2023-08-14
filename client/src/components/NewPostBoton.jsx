@@ -28,7 +28,7 @@ const NewPostBoton = () => {
       <button
         type="button"
         onClick={openModal}
-        className="flex items-center px-3 h-full bg-yellow-300 rounded-2xl hover:bg-yellow-400"
+        className="flex items-center px-3 h-full bg-yellow-400 rounded-2xl hover:bg-yellow-500"
       >
         <PlusCircleIcon className="h-6 w-6" />
         <a className="pl-1">Crear</a>
@@ -79,7 +79,7 @@ const NewPostBoton = () => {
                     <div className="mt-4">
                       <button
                         type="submit"
-                        className="inline-flex justify-center rounded-md border border-transparent bg-yellow-300 px-4 py-2 text-sm font-medium text-black hover:bg-yellow-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300 focus-visible:ring-offset-2"
+                        className="inline-flex justify-center rounded-md border border-transparent bg-yellow-400 px-4 py-2 text-sm font-medium text-black hover:bg-yellow-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300 focus-visible:ring-offset-2"
                       >
                         Publicar
                       </button>

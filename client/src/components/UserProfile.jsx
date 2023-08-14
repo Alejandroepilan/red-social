@@ -59,11 +59,11 @@ const UserProfile = () => {
         <div className="flex-1 px-8 overflow-y-auto">
           <div className="bg-white drop-shadow-sm rounded-2xl p-6 mb-8">
             <div className="h-48 w-full rounded-2xl muro flex flex-col justify-end">
-              <div className="relative h-20 w-20 rounded-2xl mt-auto m-5">
+              <div className="relative h-20 w-20 rounded-full mt-auto ml-5 top-10 ring-4 ring-white">
                 <img className="" src={avatarUrl} />
               </div>
             </div>
-            <div className="text-black m-5">
+            <div className="text-black m-5 mt-14">
               @{userProfile.username}
               <FontAwesomeIcon
                 icon={faCircleCheck}
