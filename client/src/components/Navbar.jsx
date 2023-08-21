@@ -15,7 +15,7 @@ const Navbar = () => {
         <div className="flex items-center justify-start">
           <Link to={"/"} className="flex items-center justify-start">
             <img src={viteLogo} />
-            <a className="flex items-center pl-2 font-bold">Red Social</a>
+            <span className="flex items-center pl-2 font-bold">Red Social</span>
           </Link>
         </div>
         <div className="relative flex items-center justify-center mx-20">
@@ -24,7 +24,7 @@ const Navbar = () => {
           </div>
           <input
             type="search"
-            class="block w-full bg-gray-50 rounded-2xl h-full px-4 pl-10 focus:outline-none"
+            className="block w-full bg-gray-50 rounded-2xl h-full px-4 pl-10 focus:outline-none"
             placeholder="Buscar"
           />
         </div>

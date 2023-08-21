@@ -37,7 +37,6 @@ const Post = (props) => {
 
   const handleDarLike = (postId) => {
     darLike(postId);
-    console.log(user.id);
     //setVisualLike(+1);
   };
 

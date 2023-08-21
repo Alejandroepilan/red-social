@@ -4,13 +4,18 @@ import { useAuth } from "../context/AuthContext";
 import { usePosts } from "../context/PostsContext";
 import { getProfile } from "../api/profile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleCheck,
+  faUserPlus,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import "../pages/ProfilePage.css";
 
 import Dummy from "../components/Dummy";
 import Posts from "../components/Posts";
 import Navbar from "../components/Navbar";
 import SidebarMenu from "../components/SidebarMenu";
+import { EnvelopeIcon, UserPlusIcon } from "@heroicons/react/24/outline";
 
 const UserProfile = () => {
   const [userProfile, setUserProfile] = useState({});
@@ -63,16 +68,45 @@ const UserProfile = () => {
                 <img className="" src={avatarUrl} />
               </div>
             </div>
-            <div className="text-black m-5 mt-14">
-              @{userProfile.username}
-              <FontAwesomeIcon
-                icon={faCircleCheck}
-                className="text-yellow-400 ml-1 bg-white rounded-full"
-              />
-            </div>
-            <div className="flex flex-colinline-block m-5">
-              {/*<div>10 Seguidores</div>*/}
-              <div>{publicacionesDelUsuario.length} Publicaciones</div>
+
+            <div className="text-black mx-5 mt-14 space-y-5">
+              <div className="">
+                <span>@{userProfile.username}</span>
+                <FontAwesomeIcon
+                  icon={faCircleCheck}
+                  className="text-yellow-400 ml-1 bg-white rounded-full"
+                />
+              </div>
+
+              <div>
+                <span>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Aenean scelerisque quam ut risus laoreet, in congue odio
+                  blandit.
+                </span>
+              </div>
+
+              <div className="flex flex-colinline-block">
+                {/*<div>10 Seguidores</div>*/}
+                <div>
+                  <span className="font-bold">
+                    {publicacionesDelUsuario.length}
+                  </span>
+                  <span className="pl-1">Publicaciones</span>
+                </div>
+              </div>
+
+              <div className="flex flex-colinline-block space-x-3">
+                <div className="flex items-center cursor-pointer px-3 py-1 h-full bg-yellow-400 rounded-2xl hover:bg-yellow-500">
+                  <UserPlusIcon className="h-6" />
+                  <a className="pl-2">Seguir</a>
+                </div>
+
+                <div className="flex items-center cursor-pointer px-3 py-1 h-full bg-yellow-400 rounded-2xl hover:bg-yellow-500">
+                  <EnvelopeIcon className="h-6" />
+                  <a className="pl-2">Enviar mensaje</a>
+                </div>
+              </div>
             </div>
           </div>
 
