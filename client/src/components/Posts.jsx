@@ -12,8 +12,7 @@ import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 const Post = (props) => {
   const { user } = useAuth();
   const { posts, verPosts } = usePosts();
-  const [visualLike, setVisualLike] = useState(0);
-  const [likesState, setLikesState] = useState({});
+  const [liked, setLiked] = useState(false);
 
   var avatarUrl = "https://api.multiavatar.com/";
 
@@ -29,20 +28,14 @@ const Post = (props) => {
     verPosts();
   }, []);
 
-  const handleLike = (publicacionId) => {
-    const newLikesState = { ...likesState };
-    newLikesState[publicacionId] = !newLikesState[publicacionId];
-    setLikesState(newLikesState);
-  };
-
   const handleDarLike = (postId) => {
     darLike(postId);
-    //setVisualLike(+1);
+    setLiked(true);
   };
 
   const handleQuitarLike = (postId) => {
     quitarLike(postId);
-    //setVisualLike(-1);
+    setLiked(false);
   };
 
   return (
@@ -71,7 +64,7 @@ const Post = (props) => {
             <div className="py-8">{post.text}</div>
             <div className="flex">
               <div className="">
-                {post.likes.length + visualLike}
+                {post.likes.length}
 
                 {post.likes.some((userId) => userId === user.id) ? (
                   <button onClick={() => handleQuitarLike(post._id)}>
@@ -88,6 +81,7 @@ const Post = (props) => {
                     />
                   </button>
                 )}
+                {liked ? "No me gusta" : "Me gusta"}
               </div>
               <div className="text-xs flex items-center">
                 <a className="px-2">•</a>
