@@ -1,12 +1,8 @@
-import User from "../models/user.model.js";
 import Post from "../models/post.model.js";
 
 export const createPost = async (req, res) => {
   const { text } = req.body;
-  const userFound = await User.findById(req.user.id).select("-password");
   const userId = req.user.id;
-
-  console.log(req.user.id);
 
   try {
     const newPost = new Post({

@@ -89,7 +89,15 @@ const UserProfile = () => {
               <div className="flex flex-colinline-block">
                 {/*<div>10 Seguidores</div>*/}
                 <div>
-                  <span className="font-bold">
+                  <span className="font-bold">0</span>
+                  <span className="pl-1">Seguidores</span>
+                </div>
+                <div>
+                  <span className="font-bold ml-4">0</span>
+                  <span className="pl-1">Siguiendo</span>
+                </div>
+                <div>
+                  <span className="font-bold ml-4">
                     {publicacionesDelUsuario.length}
                   </span>
                   <span className="pl-1">Publicaciones</span>
