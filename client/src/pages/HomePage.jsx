@@ -1,6 +1,6 @@
 import React from "react";
 import Dummy from "../components/Dummy";
-import Posts from "../components/Posts";
+import Post from "../components/Post";
 import Navbar from "../components/Navbar";
 import SidebarMenu from "../components/SidebarMenu";
 
@@ -15,7 +15,7 @@ const HomePage = () => {
         </div>
 
         <div className="flex-1 px-8 overflow-y-auto">
-          <Posts />
+          <Post />
         </div>
 
         <div className="w-1/4 px-8 overflow-y-auto">

@@ -12,7 +12,6 @@ import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 const Post = (props) => {
   const { user } = useAuth();
   const { posts, verPosts } = usePosts();
-  const [liked, setLiked] = useState(false);
 
   var avatarUrl = "https://api.multiavatar.com/";
 
@@ -24,24 +23,36 @@ const Post = (props) => {
     );
   }
 
+  const [elementStates, setElementStates] = useState(
+    postsSeleccionados.map(() => false)
+  );
+
+  const toggleElement = (index) => {
+    const newElementStates = [...elementStates];
+    newElementStates[index] = !newElementStates[index];
+    setElementStates(newElementStates);
+  };
+
   useEffect(() => {
     verPosts();
   }, []);
 
   const handleDarLike = (postId) => {
     darLike(postId);
-    setLiked(true);
   };
 
   const handleQuitarLike = (postId) => {
     quitarLike(postId);
-    setLiked(false);
+  };
+
+  const handleLike = (postId) => {
+    console.log("aaaaa");
   };
 
   return (
     <>
       <div className="text-black">
-        {postsSeleccionados.map((post) => (
+        {postsSeleccionados.map((post, index) => (
           <div
             className="bg-white drop-shadow-sm rounded-2xl p-6 mb-8"
             key={post._id}
@@ -67,21 +78,44 @@ const Post = (props) => {
                 {post.likes.length}
 
                 {post.likes.some((userId) => userId === user.id) ? (
-                  <button onClick={() => handleQuitarLike(post._id)}>
-                    <FontAwesomeIcon
-                      icon={faHeart}
-                      className="text-red-500 ml-1"
-                    />
+                  <button
+                    onClick={() => {
+                      handleQuitarLike(post._id);
+                      toggleElement(index);
+                    }}
+                  >
+                    {elementStates[index] ? (
+                      <FontAwesomeIcon
+                        icon={faHeartRegular}
+                        className="text-red-500 ml-1"
+                      />
+                    ) : (
+                      <FontAwesomeIcon
+                        icon={faHeart}
+                        className="text-red-500 ml-1"
+                      />
+                    )}
                   </button>
                 ) : (
-                  <button onClick={() => handleDarLike(post._id)}>
-                    <FontAwesomeIcon
-                      icon={faHeartRegular}
-                      className="text-red-500 ml-1"
-                    />
+                  <button
+                    onClick={() => {
+                      handleDarLike(post._id);
+                      toggleElement(index);
+                    }}
+                  >
+                    {elementStates[index] ? (
+                      <FontAwesomeIcon
+                        icon={faHeart}
+                        className="text-red-500 ml-1"
+                      />
+                    ) : (
+                      <FontAwesomeIcon
+                        icon={faHeartRegular}
+                        className="text-red-500 ml-1"
+                      />
+                    )}
                   </button>
                 )}
-                {liked ? "No me gusta" : "Me gusta"}
               </div>
               <div className="text-xs flex items-center">
                 <a className="px-2">•</a>
@@ -99,18 +133,3 @@ const Post = (props) => {
 };
 
 export default Post;
-
-/*
-<div className="mt-2">
-              {post.likes}
-
-              {post.liked ? (
-                <FontAwesomeIcon icon={faHeart} className="text-red-500 ml-1" />
-              ) : (
-                <FontAwesomeIcon
-                  icon={faHeartRegular}
-                  className="text-red-500 ml-1"
-                />
-              )}
-            </div>
-*/

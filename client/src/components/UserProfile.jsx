@@ -12,7 +12,7 @@ import {
 import "../pages/ProfilePage.css";
 
 import Dummy from "../components/Dummy";
-import Posts from "../components/Posts";
+import Post from "../components/Post";
 import Navbar from "../components/Navbar";
 import SidebarMenu from "../components/SidebarMenu";
 import { EnvelopeIcon, UserPlusIcon } from "@heroicons/react/24/outline";
@@ -118,7 +118,7 @@ const UserProfile = () => {
             </div>
           </div>
 
-          <Posts userSeleccionado={userProfile._id} />
+          <Post userSeleccionado={userProfile._id} />
         </div>
 
         <div className="w-1/4 px-8 overflow-y-auto">
