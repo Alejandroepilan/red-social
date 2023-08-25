@@ -71,3 +71,13 @@ export const quitarLike = async (req, res) => {
     console.error(error);
   }
 };
+
+export const getLikes = async (req, res) => {
+  const postId = req.params.postId;
+
+  Post.findById(postId)
+    .select("likes")
+    .then((result) => {
+      return res.json(result.likes.length);
+    });
+};

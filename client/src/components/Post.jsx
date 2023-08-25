@@ -4,7 +4,7 @@ import { formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
 import { useAuth } from "../context/AuthContext";
 import { usePosts } from "../context/PostsContext";
-import { darLike, quitarLike } from "../api/posts";
+import { darLike, quitarLike, getLikes } from "../api/posts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
@@ -37,18 +37,6 @@ const Post = (props) => {
     verPosts();
   }, []);
 
-  const handleDarLike = (postId) => {
-    darLike(postId);
-  };
-
-  const handleQuitarLike = (postId) => {
-    quitarLike(postId);
-  };
-
-  const handleLike = (postId) => {
-    console.log("aaaaa");
-  };
-
   return (
     <>
       <div className="text-black">
@@ -80,7 +68,7 @@ const Post = (props) => {
                 {post.likes.some((userId) => userId === user.id) ? (
                   <button
                     onClick={() => {
-                      handleQuitarLike(post._id);
+                      quitarLike(post._id);
                       toggleElement(index);
                     }}
                   >
@@ -99,7 +87,7 @@ const Post = (props) => {
                 ) : (
                   <button
                     onClick={() => {
-                      handleDarLike(post._id);
+                      darLike(post._id);
                       toggleElement(index);
                     }}
                   >

@@ -5,6 +5,7 @@ import {
   getPosts,
   darLike,
   quitarLike,
+  getLikes,
 } from "../controllers/post.controllers.js";
 
 const router = Router();
@@ -12,7 +13,8 @@ const router = Router();
 router.post("/create-post", authRequired, createPost);
 router.get("/get-posts", authRequired, getPosts);
 
-router.post("/dar-like/:postId", authRequired, darLike);
-router.post("/quitar-like/:postId", authRequired, quitarLike);
+router.patch("/dar-like/:postId", authRequired, darLike);
+router.patch("/quitar-like/:postId", authRequired, quitarLike);
+router.get("/get-likes/:postId", authRequired, getLikes);
 
 export default router;
