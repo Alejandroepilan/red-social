@@ -6,7 +6,6 @@ import cors from "cors";
 import authRoutes from "./routes/auth.routes.js";
 import postRoutes from "./routes/post.routes.js";
 import profileRoutes from "./routes/profile.routes.js";
-import userProfileRoutes from "./routes/userProfile.routes.js";
 
 const app = express();
 
@@ -22,6 +21,6 @@ app.use(cookieParser());
 
 app.use("/public", express.static("public"));
 
-app.use("/api", authRoutes, postRoutes, profileRoutes, userProfileRoutes);
+app.use("/api", authRoutes, postRoutes, profileRoutes);
 
 export default app;

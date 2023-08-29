@@ -9,6 +9,7 @@ import ProfilePage from "./pages/ProfilePage";
 import UserProfile from "./components/UserProfile";
 import NotFoundPage from "./pages/NotFoundPage";
 import ChatsPage from "./pages/ChatsPage";
+import AdminPage from "./pages/AdminPage";
 
 import TestPage from "./pages/TestPage";
 
@@ -29,6 +30,8 @@ const App = () => {
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/u/:username" element={<UserProfile />} />
               <Route path="/chats" element={<ChatsPage />} />
+
+              <Route path="/admin" element={<AdminPage />} />
 
               <Route path="/test" element={<TestPage />} />
             </Route>

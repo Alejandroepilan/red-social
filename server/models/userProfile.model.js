@@ -12,7 +12,7 @@ const userProfileSchema = new mongoose.Schema(
     },
     bio: {
       type: String,
-      default: null,
+      default: "",
     },
     followers: [
       {
@@ -26,6 +26,16 @@ const userProfileSchema = new mongoose.Schema(
         default: null,
       },
     ],
+    badges: [
+      {
+        type: String,
+        default: null,
+      },
+    ],
+    permissions: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: { createdAt: false },

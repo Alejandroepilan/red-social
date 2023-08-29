@@ -63,6 +63,32 @@ const UserProfile = () => {
 
         <div className="flex-1 px-8 overflow-y-auto">
           <div className="bg-white drop-shadow-sm rounded-2xl p-6 mb-8">
+            <div className="grid">
+              <span className="font-bold text-lg">Perfil</span>
+              <span className="mt-4">
+                Esta información se mostrará públicamente, así que ten cuidado
+                con lo que compartes.
+              </span>
+
+              <span className="mt-8">Nombre de usuario</span>
+              <input
+                type="text"
+                className="h-10 w-1/2 p-4 bg-gray-50 rounded-2xl focus:outline-none mt-2"
+              ></input>
+
+              <span className="mt-8">Biografía</span>
+              <textarea className="px-4 py-2 bg-gray-50 rounded-2xl focus:outline-none mt-2 resize-none"></textarea>
+
+              <div className="mt-8">
+                <button className="p-2 px-3 bg-yellow-400 rounded-2xl hover:bg-yellow-500">
+                  Guardar
+                </button>
+                <button className="ml-4">Cancelar</button>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white drop-shadow-sm rounded-2xl p-6 mb-8">
             <div className="h-48 w-full rounded-2xl muro flex flex-col justify-end">
               <div className="relative h-20 w-20 rounded-full mt-auto ml-5 top-10 ring-4 ring-white">
                 <img className="" src={avatarUrl} />
