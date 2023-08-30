@@ -1,9 +1,8 @@
 import React, { useState, Fragment } from "react";
 import { useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
-import { PlusCircleIcon } from "@heroicons/react/24/outline";
-import { usePosts } from "../context/PostsContext";
-import "../pages/ProfilePage.css";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { usePosts } from "../../context/PostsContext";
 
 const NewPostBoton = () => {
   const { register, handleSubmit } = useForm();
@@ -28,10 +27,10 @@ const NewPostBoton = () => {
       <button
         type="button"
         onClick={openModal}
-        className="flex items-center px-3 h-full bg-yellow-400 rounded-2xl hover:bg-yellow-500"
+        className="flex items-center px-3 h-full bg-yellow-400 rounded-2xl hover:bg-yellow-500 "
       >
-        <PlusCircleIcon className="h-6 w-6" />
-        <a className="pl-1">Crear</a>
+        <PlusIcon className="h-6 w-6" />
+        <a className="pl-1 font-medium">Crear</a>
       </button>
 
       <Transition appear show={isOpen} as={Fragment}>

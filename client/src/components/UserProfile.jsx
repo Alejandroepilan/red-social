@@ -3,19 +3,15 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { usePosts } from "../context/PostsContext";
 import { getProfile } from "../api/profile";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCircleCheck,
-  faUserPlus,
-  faPlus,
-} from "@fortawesome/free-solid-svg-icons";
+  EnvelopeIcon,
+  UserPlusIcon,
+  CheckBadgeIcon,
+} from "@heroicons/react/24/outline";
 import "../pages/ProfilePage.css";
-
-import Dummy from "../components/Dummy";
 import Post from "../components/Post";
 import Navbar from "../components/Navbar";
 import SidebarMenu from "../components/SidebarMenu";
-import { EnvelopeIcon, UserPlusIcon } from "@heroicons/react/24/outline";
 
 const UserProfile = () => {
   const [userProfile, setUserProfile] = useState({});
@@ -62,7 +58,7 @@ const UserProfile = () => {
         </div>
 
         <div className="flex-1 px-8 overflow-y-auto">
-          <div className="bg-white drop-shadow-sm rounded-2xl p-6 mb-8">
+          <div className="bg-white shadow rounded-2xl p-6 mb-8 ring-1 ring-black ring-opacity-5">
             <div className="grid">
               <span className="font-bold text-lg">Perfil</span>
               <span className="mt-4">
@@ -77,18 +73,18 @@ const UserProfile = () => {
               ></input>
 
               <span className="mt-8">Biografía</span>
-              <textarea className="px-4 py-2 bg-gray-50 rounded-2xl focus:outline-none mt-2 resize-none"></textarea>
+              <textarea className="p-4 h-32 bg-gray-50 rounded-2xl focus:outline-none mt-2 resize-none"></textarea>
 
               <div className="mt-8">
-                <button className="p-2 px-3 bg-yellow-400 rounded-2xl hover:bg-yellow-500">
+                <button className="p-2 px-3 bg-yellow-400 rounded-2xl hover:bg-yellow-500 font-medium">
                   Guardar
                 </button>
-                <button className="ml-4">Cancelar</button>
+                <button className="ml-4 font-medium">Cancelar</button>
               </div>
             </div>
           </div>
 
-          <div className="bg-white drop-shadow-sm rounded-2xl p-6 mb-8">
+          <div className="bg-white shadow rounded-2xl p-6 mb-8 ring-1 ring-black ring-opacity-5">
             <div className="h-48 w-full rounded-2xl muro flex flex-col justify-end">
               <div className="relative h-20 w-20 rounded-full mt-auto ml-5 top-10 ring-4 ring-white">
                 <img className="" src={avatarUrl} />
@@ -96,12 +92,9 @@ const UserProfile = () => {
             </div>
 
             <div className="text-black mx-5 mt-14 space-y-5">
-              <div className="">
-                <span>@{userProfile.username}</span>
-                <FontAwesomeIcon
-                  icon={faCircleCheck}
-                  className="text-yellow-400 ml-1 bg-white rounded-full"
-                />
+              <div className="flex">
+                <span className="font-medium">@{userProfile.username}</span>
+                <CheckBadgeIcon className="ml-1 text-yellow-400 h-6 w-6" />
               </div>
 
               <div>
@@ -115,15 +108,15 @@ const UserProfile = () => {
               <div className="flex flex-colinline-block">
                 {/*<div>10 Seguidores</div>*/}
                 <div>
-                  <span className="font-bold">0</span>
+                  <span className="font-medium">0</span>
                   <span className="pl-1">Seguidores</span>
                 </div>
                 <div>
-                  <span className="font-bold ml-4">0</span>
+                  <span className="font-medium ml-4">0</span>
                   <span className="pl-1">Siguiendo</span>
                 </div>
                 <div>
-                  <span className="font-bold ml-4">
+                  <span className="font-medium ml-4">
                     {publicacionesDelUsuario.length}
                   </span>
                   <span className="pl-1">Publicaciones</span>
@@ -133,12 +126,12 @@ const UserProfile = () => {
               <div className="flex flex-colinline-block space-x-3">
                 <div className="flex items-center cursor-pointer px-3 py-1 h-full bg-yellow-400 rounded-2xl hover:bg-yellow-500">
                   <UserPlusIcon className="h-6" />
-                  <a className="pl-2">Seguir</a>
+                  <a className="pl-2 font-medium">Seguir</a>
                 </div>
 
                 <div className="flex items-center cursor-pointer px-3 py-1 h-full bg-yellow-400 rounded-2xl hover:bg-yellow-500">
                   <EnvelopeIcon className="h-6" />
-                  <a className="pl-2">Enviar mensaje</a>
+                  <a className="pl-2 font-medium">Enviar mensaje</a>
                 </div>
               </div>
             </div>
@@ -147,12 +140,7 @@ const UserProfile = () => {
           <Post userSeleccionado={userProfile._id} />
         </div>
 
-        <div className="w-1/4 px-8 overflow-y-auto">
-          <Dummy />
-          <Dummy />
-          <Dummy />
-          <Dummy />
-        </div>
+        <div className="w-1/4 px-8 overflow-y-auto"></div>
       </div>
     </div>
   );

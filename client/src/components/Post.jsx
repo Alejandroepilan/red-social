@@ -5,9 +5,8 @@ import { es } from "date-fns/locale";
 import { useAuth } from "../context/AuthContext";
 import { usePosts } from "../context/PostsContext";
 import { darLike, quitarLike, getLikes } from "../api/posts";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck, faHeart } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
+import { CheckBadgeIcon, HeartIcon } from "@heroicons/react/24/outline";
+import { HeartIcon as HeartIconSolid } from "@heroicons/react/24/solid";
 
 const Post = (props) => {
   const { user } = useAuth();
@@ -42,7 +41,7 @@ const Post = (props) => {
       <div className="text-black">
         {postsSeleccionados.map((post, index) => (
           <div
-            className="bg-white drop-shadow-sm rounded-2xl p-6 mb-8"
+            className="bg-white shadow rounded-2xl p-6 mb-8 ring-1 ring-black ring-opacity-5"
             key={post._id}
           >
             <Link
@@ -53,16 +52,13 @@ const Post = (props) => {
                 <img src={avatarUrl + post.userId.username + ".svg"} />
               </div>
               <div className=" flex items-center pl-2">
-                @{post.userId.username}
-                <FontAwesomeIcon
-                  icon={faCircleCheck}
-                  className="text-yellow-400 ml-1"
-                />
+                <span className="font-medium">@{post.userId.username}</span>
+                <CheckBadgeIcon className="ml-1 text-yellow-400 h-6 w-6" />
               </div>
             </Link>
             <div className="py-8">{post.text}</div>
             <div className="flex">
-              <div className="">
+              <div className="flex">
                 {post.likes.length}
 
                 {post.likes.some((userId) => userId === user.id) ? (
@@ -73,15 +69,9 @@ const Post = (props) => {
                     }}
                   >
                     {elementStates[index] ? (
-                      <FontAwesomeIcon
-                        icon={faHeartRegular}
-                        className="text-red-500 ml-1"
-                      />
+                      <HeartIcon className="ml-1 text-red-500 h-5 w-5 ju" />
                     ) : (
-                      <FontAwesomeIcon
-                        icon={faHeart}
-                        className="text-red-500 ml-1"
-                      />
+                      <HeartIconSolid className="ml-1 text-red-500 h-5 w-5" />
                     )}
                   </button>
                 ) : (
@@ -92,15 +82,9 @@ const Post = (props) => {
                     }}
                   >
                     {elementStates[index] ? (
-                      <FontAwesomeIcon
-                        icon={faHeart}
-                        className="text-red-500 ml-1"
-                      />
+                      <HeartIconSolid className="ml-1 text-red-500 h-5 w-5" />
                     ) : (
-                      <FontAwesomeIcon
-                        icon={faHeartRegular}
-                        className="text-red-500 ml-1"
-                      />
+                      <HeartIcon className="ml-1 text-red-500 h-5 w-5" />
                     )}
                   </button>
                 )}

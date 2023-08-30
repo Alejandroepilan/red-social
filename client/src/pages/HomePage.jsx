@@ -1,8 +1,8 @@
 import React from "react";
-import Dummy from "../components/Dummy";
 import Post from "../components/Post";
 import Navbar from "../components/Navbar";
 import SidebarMenu from "../components/SidebarMenu";
+import WidgetHora from "../components/widgets/WidgetHora";
 
 const HomePage = () => {
   return (
@@ -18,12 +18,7 @@ const HomePage = () => {
           <Post />
         </div>
 
-        <div className="w-1/4 px-8 overflow-y-auto">
-          <Dummy />
-          <Dummy />
-          <Dummy />
-          <Dummy />
-        </div>
+        <div className="w-1/4 px-8 overflow-y-auto"></div>
       </div>
     </div>
   );
