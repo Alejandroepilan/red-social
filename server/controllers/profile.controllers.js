@@ -26,7 +26,8 @@ export const getUserProfile = async (req, res) => {
 /* CREAR PERFIL DE USUARIO TEST */
 
 export const createTestProfile = async (req, res) => {
-  const newProfile = new UserProfile();
+  const userId = req.user.id;
+  const newProfile = new UserProfile({ userId: userId });
 
   await newProfile.save();
 
@@ -54,9 +55,24 @@ export const updateProfile = async (req, res) => {
   }
 };
 
-export const getProfile = async (req, res) => {
-  const username = req.user.id;
-  console.log(username);
+export const checkUsername = async (req, res) => {
+  const usernameReq = req.params.username;
 
-  return res.status(200).json("va!");
+  try {
+    User.findOne({ username: usernameReq })
+      .select("username")
+      .then((result) => {
+        if (result !== null) {
+          return res.json(true);
+        } else {
+          return res.json(false);
+        }
+      });
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+};
+
+export const getBadges = async (req, res) => {
+  console.log("a");
 };

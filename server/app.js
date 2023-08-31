@@ -15,6 +15,13 @@ app.use(
     credentials: true,
   })
 );
+
+// Eliminar header en el que pone que servidor es (Apache, Express...)
+app.use((req, res, next) => {
+  res.removeHeader("X-Powered-By");
+  next();
+});
+
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());
