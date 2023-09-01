@@ -1,6 +1,8 @@
 import React from "react";
 
 const TestPage = () => {
+  console.log("a");
+
   return <div></div>;
 };
 

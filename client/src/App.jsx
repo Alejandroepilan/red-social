@@ -5,7 +5,6 @@ import { PostsProvider } from "./context/PostsContext";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
-import ProfilePage from "./pages/ProfilePage";
 import UserProfile from "./components/UserProfile";
 import NotFoundPage from "./pages/NotFoundPage";
 import ChatsPage from "./pages/ChatsPage";
@@ -24,16 +23,14 @@ const App = () => {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="*" element={<NotFoundPage />} />
+            <Route path="/test" element={<TestPage />} />
 
             <Route element={<ProtectedRoute />}>
               <Route path="/" element={<HomePage />} />
-              <Route path="/profile" element={<ProfilePage />} />
               <Route path="/u/:username" element={<UserProfile />} />
               <Route path="/chats" element={<ChatsPage />} />
 
               <Route path="/admin" element={<AdminPage />} />
-
-              <Route path="/test" element={<TestPage />} />
             </Route>
           </Routes>
         </BrowserRouter>

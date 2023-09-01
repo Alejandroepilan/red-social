@@ -2,25 +2,26 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { usePosts } from "../context/PostsContext";
 import { getProfile, checkUsername } from "../api/profile";
+import { useAuth } from "../context/AuthContext";
 import {
   EnvelopeIcon,
   UserPlusIcon,
-  CheckBadgeIcon,
   XMarkIcon,
   CheckIcon,
-  PencilIcon,
-  ShieldExclamationIcon,
+  PencilSquareIcon,
 } from "@heroicons/react/24/outline";
 import "../pages/ProfilePage.css";
 import Post from "../components/Post";
 import Navbar from "../components/Navbar";
 import SidebarMenu from "../components/SidebarMenu";
+import ProfileBadges from "./ProfileBadges";
 
 const UserProfile = () => {
-  const [userProfile, setUserProfile] = useState({});
+  const { user } = useAuth();
   const { posts, verPosts } = usePosts();
   const { username } = useParams();
-  const navigate = useNavigate();
+  const { navigate } = useNavigate();
+  const [userProfile, setUserProfile] = useState({});
   const [editingProfile, setEditingProfile] = useState(false);
   const [usernameExists, setUsernameExists] = useState(false);
 
@@ -30,6 +31,8 @@ const UserProfile = () => {
   const publicacionesDelUsuario = posts.filter(
     (post) => post.userId._id === userProfile._id
   );
+
+  const esMiPerfil = userProfile.username === user.username;
 
   const toggleEditProfile = () => {
     setEditingProfile(!editingProfile);
@@ -124,7 +127,7 @@ const UserProfile = () => {
               </div>
             </div>
           ) : (
-            <div>
+            <>
               <div className="bg-white shadow rounded-2xl p-6 mb-8 ring-1 ring-black ring-opacity-5">
                 <div className="h-48 w-full rounded-2xl muro flex flex-col justify-end">
                   <div className="relative h-20 w-20 rounded-full mt-auto ml-5 top-10 ring-4 ring-white">
@@ -134,9 +137,11 @@ const UserProfile = () => {
 
                 <div className="text-black mx-5 mt-14 space-y-5">
                   <div className="flex">
-                    <span className="font-medium">@{userProfile.username}</span>
-                    <CheckBadgeIcon className="ml-1 text-cyan-400 h-6 w-6" />
-                    <ShieldExclamationIcon className=" text-violet-600 h-6 w-6" />
+                    <span className="font-medium mr-1">
+                      @{userProfile.username}
+                    </span>
+
+                    <ProfileBadges />
                   </div>
 
                   <div>
@@ -166,28 +171,32 @@ const UserProfile = () => {
                   </div>
 
                   <div className="flex flex-colinline-block space-x-3">
-                    <button
-                      onClick={toggleEditProfile}
-                      className="flex items-center px-3 py-1 h-full bg-yellow-400 rounded-2xl hover:bg-yellow-500"
-                    >
-                      <PencilIcon className="h-5" />
-                      <a className="pl-2 font-medium">Editar perfil</a>
-                    </button>
+                    {esMiPerfil ? (
+                      <button
+                        onClick={toggleEditProfile}
+                        className="flex items-center px-3 py-1 h-full bg-yellow-400 rounded-2xl hover:bg-yellow-500"
+                      >
+                        <PencilSquareIcon className="h-5" />
+                        <a className="pl-2 font-medium">Editar perfil</a>
+                      </button>
+                    ) : (
+                      <>
+                        <button className="flex items-center px-3 py-1 h-full bg-yellow-400 rounded-2xl hover:bg-yellow-500">
+                          <UserPlusIcon className="h-5" />
+                          <a className="pl-2 font-medium">Seguir</a>
+                        </button>
 
-                    <button className="flex items-center px-3 py-1 h-full bg-yellow-400 rounded-2xl hover:bg-yellow-500">
-                      <UserPlusIcon className="h-5" />
-                      <a className="pl-2 font-medium">Seguir</a>
-                    </button>
-
-                    <button className="flex items-center px-3 py-1 h-full bg-yellow-400 rounded-2xl hover:bg-yellow-500">
-                      <EnvelopeIcon className="h-5" />
-                      <a className="pl-2 font-medium">Enviar mensaje</a>
-                    </button>
+                        <button className="flex items-center px-3 py-1 h-full bg-yellow-400 rounded-2xl hover:bg-yellow-500">
+                          <EnvelopeIcon className="h-5" />
+                          <a className="pl-2 font-medium">Enviar mensaje</a>
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
               <Post userSeleccionado={userProfile._id} />
-            </div>
+            </>
           )}
         </div>
 

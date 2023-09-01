@@ -1,4 +1,5 @@
 import User from "../models/user.model.js";
+import UserProfile from "../models/userProfile.model.js";
 import bcrypt from "bcryptjs";
 import { createAccessToken } from "../libs/jwt.js";
 import jwt from "jsonwebtoken";
@@ -23,6 +24,7 @@ export const register = async (req, res) => {
     });
 
     const userSaved = await newUser.save();
+
     const token = await createAccessToken({ id: userSaved._id });
     res.cookie("token", token);
     res.json({
@@ -32,6 +34,12 @@ export const register = async (req, res) => {
       createdAt: userSaved.createdAt,
       updatedAt: userSaved.updatedAt,
     });
+
+    const newUserProfile = new UserProfile({
+      userId: userSaved._id,
+    });
+
+    await newUserProfile.save();
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
