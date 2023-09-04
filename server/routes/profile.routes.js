@@ -5,15 +5,18 @@ import {
   createTestProfile,
   updateProfile,
   checkUsername,
-  getBadges,
+  followUser,
+  unfollowUser,
 } from "../controllers/profile.controllers.js";
 
 const router = Router();
 
-router.get("/profile/:username", authRequired, getUserProfile);
-router.put("/update-profile", authRequired, updateProfile);
-router.get("/check-username/:username", authRequired, checkUsername);
-router.get("/get-badges/:username", authRequired, getBadges);
+router.get("/profile/get/:username", authRequired, getUserProfile);
+router.put("/profile/update/:username", authRequired, updateProfile);
+router.get("/profile/check-username/:username", authRequired, checkUsername);
+
+router.put("/follow/:userid", authRequired, followUser);
+router.put("/unfollow/:username", authRequired, unfollowUser);
 
 router.post("/create-test-profile", authRequired, createTestProfile);
 

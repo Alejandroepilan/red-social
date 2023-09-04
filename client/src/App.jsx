@@ -50,4 +50,13 @@ export default App;
  - La cookie con el token solo se guarda mientras chrome este abierto.
 
 
+
+*/
+
+/*
+
+---------- FALLOS DE SEGURIDAD ----------
+
+ - Al obtener los posts, obtiene todos los posts de la db y luego muestra los seleccionado, en vez de obtener solamente los seleccionados.
+
 */

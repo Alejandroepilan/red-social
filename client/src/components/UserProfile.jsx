@@ -21,7 +21,7 @@ const UserProfile = () => {
   const { posts, verPosts } = usePosts();
   const { username } = useParams();
   const { navigate } = useNavigate();
-  const [userProfile, setUserProfile] = useState({});
+  const [userProfile, setUserProfile] = useState([]);
   const [editingProfile, setEditingProfile] = useState(false);
   const [usernameExists, setUsernameExists] = useState(false);
 
@@ -47,23 +47,20 @@ const UserProfile = () => {
   useEffect(() => {
     verPosts();
 
-    const fetchUserProfile = async () => {
-      try {
-        const response = getProfile(username)
-          .then((response2) => {
-            setUserProfile(response2.data);
-          })
-          .catch(() => {
-            navigate("/404");
-          });
-        console.log(response);
-      } catch (error) {
-        console.error("Error al obtener el perfil del usuario", error);
-      }
-    };
+    try {
+      getProfile(username)
+        .then((response2) => {
+          setUserProfile(response2.data);
+        })
+        .catch(() => {
+          navigate("/404");
+        });
+    } catch (error) {
+      console.error("Error al obtener el perfil del usuario", error);
+    }
+  }, []);
 
-    fetchUserProfile();
-  }, [username]);
+  console.log(userProfile.followers);
 
   return (
     <div className="flex flex-col h-screen overflow-hidden text-black">
@@ -155,7 +152,9 @@ const UserProfile = () => {
                   <div className="flex flex-colinline-block">
                     {/*<div>10 Seguidores</div>*/}
                     <div>
-                      <span className="font-medium">0</span>
+                      <span className="font-medium">
+                        {userProfile.followers}
+                      </span>
                       <span className="pl-1">Seguidores</span>
                     </div>
                     <div>
