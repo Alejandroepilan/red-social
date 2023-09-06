@@ -70,16 +70,26 @@ export const checkUsername = async (req, res) => {
 };
 
 export const followUser = async (req, res) => {
-  const userId = req.user.id;
-  const userIdReq = req.params.userid;
+  const followerUserId = req.user.id;
+  const userId = req.params.userid;
 
   try {
-    UserProfile.findOneAndUpdate(
-      { userId: userIdReq },
-      { $push: { followers: userId } }
-    ).then(() => {
-      return res.status(200).json("Following!");
-    });
+    const userToFollow = UserProfile.findOne({ userId: userId });
+
+    userToFollow
+      .findOne({ followers: { $in: [followerUserId] } })
+      .then((isFollowing) => {
+        if (!isFollowing) {
+          UserProfile.findOneAndUpdate(
+            { userId: userId },
+            { $push: { followers: followerUserId } }
+          ).then(() => {
+            return res.status(200).json("Following!");
+          });
+        } else {
+          return res.status(400).json("Ya le seguia!");
+        }
+      });
   } catch (error) {
     return res.status(500).json(error);
   }

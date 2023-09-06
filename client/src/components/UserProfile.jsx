@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { usePosts } from "../context/PostsContext";
-import { getProfile, checkUsername } from "../api/profile";
+import { getProfile, checkUsername, followUser } from "../api/profile";
 import { useAuth } from "../context/AuthContext";
 import {
   EnvelopeIcon,
@@ -9,6 +9,7 @@ import {
   XMarkIcon,
   CheckIcon,
   PencilSquareIcon,
+  UserMinusIcon,
 } from "@heroicons/react/24/outline";
 import "../pages/ProfilePage.css";
 import Post from "../components/Post";
@@ -24,6 +25,7 @@ const UserProfile = () => {
   const [userProfile, setUserProfile] = useState([]);
   const [editingProfile, setEditingProfile] = useState(false);
   const [usernameExists, setUsernameExists] = useState(false);
+  const [siguiendo, setSiguiendo] = useState(false);
 
   var avatarUrl =
     "https://api.multiavatar.com/" + userProfile.username + ".svg";
@@ -36,6 +38,10 @@ const UserProfile = () => {
 
   const toggleEditProfile = () => {
     setEditingProfile(!editingProfile);
+  };
+
+  const handleFollowButton = () => {
+    setSiguiendo(!siguiendo);
   };
 
   const handleChange = async (event) => {
@@ -153,7 +159,9 @@ const UserProfile = () => {
                     {/*<div>10 Seguidores</div>*/}
                     <div>
                       <span className="font-medium">
-                        {userProfile.followers}
+                        {userProfile.followers != null
+                          ? userProfile.followers.length
+                          : ""}
                       </span>
                       <span className="pl-1">Seguidores</span>
                     </div>
@@ -180,10 +188,25 @@ const UserProfile = () => {
                       </button>
                     ) : (
                       <>
-                        <button className="flex items-center px-3 py-1 h-full bg-yellow-400 rounded-2xl hover:bg-yellow-500">
-                          <UserPlusIcon className="h-5" />
-                          <a className="pl-2 font-medium">Seguir</a>
-                        </button>
+                        {siguiendo ? (
+                          <button
+                            className="flex items-center px-3 py-1 h-full bg-yellow-400 rounded-2xl hover:bg-yellow-500"
+                            onClick={handleFollowButton}
+                          >
+                            <UserMinusIcon className="h-5" />
+                            <a className="pl-2 font-medium">Dejar de seguir</a>
+                          </button>
+                        ) : (
+                          <button
+                            className="flex items-center px-3 py-1 h-full bg-yellow-400 rounded-2xl hover:bg-yellow-500"
+                            onClick={
+                              (handleFollowButton, followUser(userProfile._id))
+                            }
+                          >
+                            <UserPlusIcon className="h-5" />
+                            <a className="pl-2 font-medium">Seguir</a>
+                          </button>
+                        )}
 
                         <button className="flex items-center px-3 py-1 h-full bg-yellow-400 rounded-2xl hover:bg-yellow-500">
                           <EnvelopeIcon className="h-5" />
