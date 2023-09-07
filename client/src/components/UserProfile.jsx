@@ -41,7 +41,12 @@ const UserProfile = () => {
   };
 
   const handleFollowButton = () => {
-    setSiguiendo(!siguiendo);
+    setSiguiendo(true);
+    followUser(userProfile._id);
+  };
+
+  const handleUnfollowButton = () => {
+    setSiguiendo(false);
   };
 
   const handleChange = async (event) => {
@@ -64,9 +69,17 @@ const UserProfile = () => {
     } catch (error) {
       console.error("Error al obtener el perfil del usuario", error);
     }
-  }, []);
 
-  console.log(userProfile.followers);
+    if (userProfile.followers != null) {
+      if (userProfile.followers.includes(user.id)) {
+        setSiguiendo(true);
+        console.log("si");
+      } else {
+        setSiguiendo(false);
+        console.log("no");
+      }
+    }
+  }, []);
 
   return (
     <div className="flex flex-col h-screen overflow-hidden text-black">
@@ -165,12 +178,12 @@ const UserProfile = () => {
                       </span>
                       <span className="pl-1">Seguidores</span>
                     </div>
-                    <div>
-                      <span className="font-medium ml-4">0</span>
+                    <div className="ml-4">
+                      <span className="font-medium">0</span>
                       <span className="pl-1">Siguiendo</span>
                     </div>
-                    <div>
-                      <span className="font-medium ml-4">
+                    <div className="ml-4">
+                      <span className="font-medium">
                         {publicacionesDelUsuario.length}
                       </span>
                       <span className="pl-1">Publicaciones</span>
@@ -191,7 +204,7 @@ const UserProfile = () => {
                         {siguiendo ? (
                           <button
                             className="flex items-center px-3 py-1 h-full bg-yellow-400 rounded-2xl hover:bg-yellow-500"
-                            onClick={handleFollowButton}
+                            onClick={handleUnfollowButton}
                           >
                             <UserMinusIcon className="h-5" />
                             <a className="pl-2 font-medium">Dejar de seguir</a>
@@ -199,19 +212,17 @@ const UserProfile = () => {
                         ) : (
                           <button
                             className="flex items-center px-3 py-1 h-full bg-yellow-400 rounded-2xl hover:bg-yellow-500"
-                            onClick={
-                              (handleFollowButton, followUser(userProfile._id))
-                            }
+                            onClick={handleFollowButton}
                           >
                             <UserPlusIcon className="h-5" />
                             <a className="pl-2 font-medium">Seguir</a>
                           </button>
                         )}
 
-                        <button className="flex items-center px-3 py-1 h-full bg-yellow-400 rounded-2xl hover:bg-yellow-500">
+                        {/*<button className="flex items-center px-3 py-1 h-full bg-yellow-400 rounded-2xl hover:bg-yellow-500">
                           <EnvelopeIcon className="h-5" />
                           <a className="pl-2 font-medium">Enviar mensaje</a>
-                        </button>
+                        </button>*/}
                       </>
                     )}
                   </div>
