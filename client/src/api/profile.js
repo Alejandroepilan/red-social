@@ -5,3 +5,4 @@ export const checkUsername = (user) =>
   axios.get(`/profile/check-username/${user}`);
 
 export const followUser = (userId) => axios.put(`/follow/${userId}`);
+export const unfollowUser = (userId) => axios.put(`/unfollow/${userId}`);

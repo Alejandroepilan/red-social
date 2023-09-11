@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { usePosts } from "../context/PostsContext";
-import { getProfile, checkUsername, followUser } from "../api/profile";
+import {
+  getProfile,
+  checkUsername,
+  followUser,
+  unfollowUser,
+} from "../api/profile";
 import { useAuth } from "../context/AuthContext";
 import {
-  EnvelopeIcon,
   UserPlusIcon,
   XMarkIcon,
   CheckIcon,
@@ -26,6 +30,7 @@ const UserProfile = () => {
   const [editingProfile, setEditingProfile] = useState(false);
   const [usernameExists, setUsernameExists] = useState(false);
   const [siguiendo, setSiguiendo] = useState(false);
+  const [numSeguidores, setNumSeguidores] = useState(0);
 
   var avatarUrl =
     "https://api.multiavatar.com/" + userProfile.username + ".svg";
@@ -43,10 +48,13 @@ const UserProfile = () => {
   const handleFollowButton = () => {
     setSiguiendo(true);
     followUser(userProfile._id);
+    setNumSeguidores(numSeguidores + 1);
   };
 
   const handleUnfollowButton = () => {
     setSiguiendo(false);
+    unfollowUser(userProfile._id);
+    setNumSeguidores(numSeguidores - 1);
   };
 
   const handleChange = async (event) => {
@@ -56,12 +64,18 @@ const UserProfile = () => {
   };
 
   useEffect(() => {
-    verPosts();
-
     try {
       getProfile(username)
-        .then((response2) => {
-          setUserProfile(response2.data);
+        .then((response) => {
+          setUserProfile(response.data);
+
+          if (response.data.followers.includes(user.id)) {
+            setSiguiendo(true);
+          } else {
+            setSiguiendo(false);
+          }
+
+          setNumSeguidores(response.data.followers.length);
         })
         .catch(() => {
           navigate("/404");
@@ -70,16 +84,13 @@ const UserProfile = () => {
       console.error("Error al obtener el perfil del usuario", error);
     }
 
-    if (userProfile.followers != null) {
-      if (userProfile.followers.includes(user.id)) {
-        setSiguiendo(true);
-        console.log("si");
-      } else {
-        setSiguiendo(false);
-        console.log("no");
-      }
-    }
+    verPosts();
   }, []);
+
+  // Dejar página en blanco hasta que se obtengan los datos del perfil solicitado.
+  if (userProfile.length === 0) {
+    return <></>;
+  }
 
   return (
     <div className="flex flex-col h-screen overflow-hidden text-black">
@@ -170,16 +181,14 @@ const UserProfile = () => {
 
                   <div className="flex flex-colinline-block">
                     {/*<div>10 Seguidores</div>*/}
-                    <div>
-                      <span className="font-medium">
-                        {userProfile.followers != null
-                          ? userProfile.followers.length
-                          : ""}
-                      </span>
+                    <div className="hover:underline cursor-pointer">
+                      <span className="font-medium">{numSeguidores}</span>
                       <span className="pl-1">Seguidores</span>
                     </div>
                     <div className="ml-4">
-                      <span className="font-medium">0</span>
+                      <span className="font-medium">
+                        {userProfile.following.length}
+                      </span>
                       <span className="pl-1">Siguiendo</span>
                     </div>
                     <div className="ml-4">

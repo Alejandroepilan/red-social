@@ -16,7 +16,7 @@ router.put("/profile/update/:username", authRequired, updateProfile);
 router.get("/profile/check-username/:username", authRequired, checkUsername);
 
 router.put("/follow/:userid", authRequired, followUser);
-router.put("/unfollow/:username", authRequired, unfollowUser);
+router.put("/unfollow/:userid", authRequired, unfollowUser);
 
 router.post("/create-test-profile", authRequired, createTestProfile);
 

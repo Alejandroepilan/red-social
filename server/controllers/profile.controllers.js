@@ -22,6 +22,7 @@ export const getUserProfile = async (req, res) => {
       username: user.username,
       createdAt: user.createdAt,
       followers: userProfile.followers,
+      following: userProfile.following,
     };
 
     res.status(200).json(userProfileDatos);
@@ -81,6 +82,11 @@ export const followUser = async (req, res) => {
       .then((isFollowing) => {
         if (!isFollowing) {
           UserProfile.findOneAndUpdate(
+            { userId: followerUserId },
+            { $push: { following: userId } }
+          ).then();
+
+          UserProfile.findOneAndUpdate(
             { userId: userId },
             { $push: { followers: followerUserId } }
           ).then(() => {
@@ -96,10 +102,34 @@ export const followUser = async (req, res) => {
 };
 
 export const unfollowUser = async (req, res) => {
-  const userId = req.user.id;
-  const userIdReq = req.params.userid;
+  const followerUserId = req.user.id;
+  const userId = req.params.userid;
 
-  console.log("b");
+  try {
+    const userToFollow = UserProfile.findOne({ userId: userId });
+
+    userToFollow
+      .findOne({ followers: { $in: [followerUserId] } })
+      .then((isFollowing) => {
+        if (isFollowing) {
+          UserProfile.findOneAndUpdate(
+            { userId: followerUserId },
+            { $pull: { following: userId } }
+          ).then();
+
+          UserProfile.findOneAndUpdate(
+            { userId: userId },
+            { $pull: { followers: followerUserId } }
+          ).then(() => {
+            return res.status(200).json("Unfollowing!");
+          });
+        } else {
+          return res.status(400).json("Ya no le seguia!");
+        }
+      });
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 };
 
 /* CREAR PERFIL DE USUARIO TEST */
