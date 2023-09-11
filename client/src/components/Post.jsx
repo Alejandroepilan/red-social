@@ -4,13 +4,14 @@ import { formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
 import { useAuth } from "../context/AuthContext";
 import { usePosts } from "../context/PostsContext";
-import { darLike, quitarLike, getLikes } from "../api/posts";
+import { darLike, quitarLike } from "../api/posts";
 import { CheckBadgeIcon, HeartIcon } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartIconSolid } from "@heroicons/react/24/solid";
 
 const Post = (props) => {
   const { user } = useAuth();
   const { posts, verPosts } = usePosts();
+  const [likes, setLikes] = useState([]);
 
   var avatarUrl = "https://api.multiavatar.com/";
 
@@ -34,6 +35,14 @@ const Post = (props) => {
 
   useEffect(() => {
     verPosts();
+
+    /*setLikes([
+      { id: post._id},
+      {}
+    ])*/
+
+    console.log(postsSeleccionados);
+    console.log(posts._id);
   }, []);
 
   return (
