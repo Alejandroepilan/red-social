@@ -15,7 +15,7 @@ const HomePage = () => {
         </div>
 
         <div className="flex-1 px-8 overflow-y-auto">
-          <Post />
+          <Post userSeleccionado={"all"} />
         </div>
 
         <div className="w-1/4 px-8 overflow-y-auto"></div>

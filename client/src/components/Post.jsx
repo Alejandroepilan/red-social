@@ -3,31 +3,28 @@ import { Link } from "react-router-dom";
 import { formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
 import { useAuth } from "../context/AuthContext";
-import { usePosts } from "../context/PostsContext";
 import { darLike, quitarLike } from "../api/posts";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartIconSolid } from "@heroicons/react/24/solid";
 import ProfileBadges from "./ProfileBadges";
+import { getPosts, createNewPost } from "../api/posts";
 
 const Post = (props) => {
   const { user } = useAuth();
-  const { posts, verPosts } = usePosts();
-  const [likes, setLikes] = useState([]);
-  const [vPosts, setVPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   var avatarUrl = "https://api.multiavatar.com/";
 
-  var postsSeleccionados = posts;
+  /*var postsSeleccionados = posts;
 
   if (props.userSeleccionado) {
     postsSeleccionados = posts.filter(
       (post) => post.userId._id === props.userSeleccionado
     );
-  }
+  }*/
 
-  const [elementStates, setElementStates] = useState(
-    postsSeleccionados.map(() => false)
-  );
+  const [elementStates, setElementStates] = useState();
+  //postsSeleccionados.map(() => false)
 
   const toggleElement = (index) => {
     const newElementStates = [...elementStates];
@@ -46,21 +43,17 @@ const Post = (props) => {
   };
 
   useEffect(() => {
-    verPosts();
+    getPosts(props.userSeleccionado).then((res) => {
+      setPosts(res.data);
+    });
 
-    /*setLikes([
-      { id: post._id},
-      {}
-    ])*/
-
-    setVPosts(postsSeleccionados);
-    console.log(postsSeleccionados);
+    console.log(posts);
   }, []);
 
   return (
     <>
       <div className="text-black">
-        {postsSeleccionados.map((post, index) => (
+        {posts.map((post, index) => (
           <div
             className="bg-white shadow rounded-2xl p-6 mb-8 ring-1 ring-black ring-opacity-5"
             key={post._id}
@@ -87,20 +80,6 @@ const Post = (props) => {
                 {/*post.likes.some((userId) => userId === user.id) ? (
                   <button
                     onClick={() => {
-                      handleQuitarLike(post._id);
-                    }}
-                  >
-                    <HeartIconSolid className="ml-1 text-red-500 h-5 w-5" />
-                  </button>
-                ) : (
-                  <button onClick={() => handleDarLike(post._id)}>
-                    <HeartIcon className="ml-1 text-red-500 h-5 w-5" />
-                  </button>
-                )*/}
-
-                {post.likes.some((userId) => userId === user.id) ? (
-                  <button
-                    onClick={() => {
                       quitarLike(post._id);
                       toggleElement(index);
                       console.log(elementStates);
@@ -125,7 +104,7 @@ const Post = (props) => {
                       <HeartIcon className="ml-1 text-red-500 h-5 w-5" />
                     )}
                   </button>
-                )}
+                    )*/}
               </div>
               <div className="text-xs flex items-center">
                 <a className="px-2">•</a>
@@ -143,3 +122,19 @@ const Post = (props) => {
 };
 
 export default Post;
+
+{
+  /*post.likes.some((userId) => userId === user.id) ? (
+                  <button
+                    onClick={() => {
+                      handleQuitarLike(post._id);
+                    }}
+                  >
+                    <HeartIconSolid className="ml-1 text-red-500 h-5 w-5" />
+                  </button>
+                ) : (
+                  <button onClick={() => handleDarLike(post._id)}>
+                    <HeartIcon className="ml-1 text-red-500 h-5 w-5" />
+                  </button>
+                )*/
+}

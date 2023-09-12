@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { usePosts } from "../context/PostsContext";
 import {
   getProfile,
   checkUsername,
@@ -23,7 +22,6 @@ import ProfileBadges from "./ProfileBadges";
 
 const UserProfile = () => {
   const { user } = useAuth();
-  const { posts, verPosts } = usePosts();
   const { username } = useParams();
   const { navigate } = useNavigate();
   const [userProfile, setUserProfile] = useState([]);
@@ -34,10 +32,6 @@ const UserProfile = () => {
 
   var avatarUrl =
     "https://api.multiavatar.com/" + userProfile.username + ".svg";
-
-  const publicacionesDelUsuario = posts.filter(
-    (post) => post.userId._id === userProfile._id
-  );
 
   const esMiPerfil = userProfile.username === user.username;
 
@@ -83,8 +77,6 @@ const UserProfile = () => {
     } catch (error) {
       console.error("Error al obtener el perfil del usuario", error);
     }
-
-    verPosts();
   }, []);
 
   // Dejar página en blanco hasta que se obtengan los datos del perfil solicitado.
@@ -193,7 +185,7 @@ const UserProfile = () => {
                     </div>
                     <div className="ml-4">
                       <span className="font-medium">
-                        {publicacionesDelUsuario.length}
+                        {/*publicacionesDelUsuario.length*/}
                       </span>
                       <span className="pl-1">Publicaciones</span>
                     </div>

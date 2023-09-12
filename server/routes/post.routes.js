@@ -11,7 +11,7 @@ import {
 const router = Router();
 
 router.post("/create-post", authRequired, createPost);
-router.get("/get-posts", authRequired, getPosts);
+router.get("/get-posts/:userId", authRequired, getPosts);
 
 router.patch("/dar-like/:postId", authRequired, darLike);
 router.patch("/quitar-like/:postId", authRequired, quitarLike);

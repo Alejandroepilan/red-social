@@ -19,9 +19,18 @@ export const createPost = async (req, res) => {
 };
 
 export const getPosts = async (req, res) => {
-  const posts = await Post.find().populate("userId", "username");
+  const userId = req.params.userId;
 
-  return res.json({ posts });
+  if (userId == "all") {
+    const posts = await Post.find().populate("userId", "username");
+    return res.status(200).json(posts);
+  } else {
+    const posts = await Post.find({ userId: userId }).populate(
+      "userId",
+      "username"
+    );
+    return res.status(200).json(posts);
+  }
 };
 
 export const darLike = async (req, res) => {
