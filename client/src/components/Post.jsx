@@ -5,13 +5,15 @@ import { es } from "date-fns/locale";
 import { useAuth } from "../context/AuthContext";
 import { usePosts } from "../context/PostsContext";
 import { darLike, quitarLike } from "../api/posts";
-import { CheckBadgeIcon, HeartIcon } from "@heroicons/react/24/outline";
+import { HeartIcon } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartIconSolid } from "@heroicons/react/24/solid";
+import ProfileBadges from "./ProfileBadges";
 
 const Post = (props) => {
   const { user } = useAuth();
   const { posts, verPosts } = usePosts();
   const [likes, setLikes] = useState([]);
+  const [vPosts, setVPosts] = useState([]);
 
   var avatarUrl = "https://api.multiavatar.com/";
 
@@ -33,6 +35,16 @@ const Post = (props) => {
     setElementStates(newElementStates);
   };
 
+  const handleDarLike = (postId) => {
+    darLike(postId);
+    toggleElement(index);
+  };
+
+  const handleQuitarLike = (postId) => {
+    quitarLike(postId);
+    toggleElement(index);
+  };
+
   useEffect(() => {
     verPosts();
 
@@ -41,8 +53,8 @@ const Post = (props) => {
       {}
     ])*/
 
+    setVPosts(postsSeleccionados);
     console.log(postsSeleccionados);
-    console.log(posts._id);
   }, []);
 
   return (
@@ -61,8 +73,10 @@ const Post = (props) => {
                 <img src={avatarUrl + post.userId.username + ".svg"} />
               </div>
               <div className=" flex items-center pl-2">
-                <span className="font-medium">@{post.userId.username}</span>
-                <CheckBadgeIcon className="ml-1 text-yellow-400 h-6 w-6" />
+                <span className="font-medium mr-1">
+                  @{post.userId.username}
+                </span>
+                <ProfileBadges />
               </div>
             </Link>
             <div className="py-8">{post.text}</div>
@@ -70,11 +84,26 @@ const Post = (props) => {
               <div className="flex">
                 {post.likes.length}
 
+                {/*post.likes.some((userId) => userId === user.id) ? (
+                  <button
+                    onClick={() => {
+                      handleQuitarLike(post._id);
+                    }}
+                  >
+                    <HeartIconSolid className="ml-1 text-red-500 h-5 w-5" />
+                  </button>
+                ) : (
+                  <button onClick={() => handleDarLike(post._id)}>
+                    <HeartIcon className="ml-1 text-red-500 h-5 w-5" />
+                  </button>
+                )*/}
+
                 {post.likes.some((userId) => userId === user.id) ? (
                   <button
                     onClick={() => {
                       quitarLike(post._id);
                       toggleElement(index);
+                      console.log(elementStates);
                     }}
                   >
                     {elementStates[index] ? (
