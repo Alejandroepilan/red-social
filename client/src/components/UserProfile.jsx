@@ -15,12 +15,12 @@ import {
   UserMinusIcon,
 } from "@heroicons/react/24/outline";
 import "../pages/ProfilePage.css";
-import Post from "../components/Post";
+import Posts from "./Posts";
 import Navbar from "../components/Navbar";
 import SidebarMenu from "../components/SidebarMenu";
 import ProfileBadges from "./ProfileBadges";
 
-const UserProfile = () => {
+const UserProfile = (props) => {
   const { user } = useAuth();
   const { username } = useParams();
   const { navigate } = useNavigate();
@@ -29,6 +29,11 @@ const UserProfile = () => {
   const [usernameExists, setUsernameExists] = useState(false);
   const [siguiendo, setSiguiendo] = useState(false);
   const [numSeguidores, setNumSeguidores] = useState(0);
+  const [numPosts, setNumPosts] = useState(0);
+
+  const getNumPosts = (data) => {
+    setNumPosts(data);
+  };
 
   var avatarUrl =
     "https://api.multiavatar.com/" + userProfile.username + ".svg";
@@ -184,9 +189,7 @@ const UserProfile = () => {
                       <span className="pl-1">Siguiendo</span>
                     </div>
                     <div className="ml-4">
-                      <span className="font-medium">
-                        {/*publicacionesDelUsuario.length*/}
-                      </span>
+                      <span className="font-medium">{numPosts}</span>
                       <span className="pl-1">Publicaciones</span>
                     </div>
                   </div>
@@ -229,7 +232,10 @@ const UserProfile = () => {
                   </div>
                 </div>
               </div>
-              <Post userSeleccionado={userProfile._id} />
+              <Posts
+                userSeleccionado={userProfile._id}
+                numPostsUser={getNumPosts}
+              />
             </>
           )}
         </div>

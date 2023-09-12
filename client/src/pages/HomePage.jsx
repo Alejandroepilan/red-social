@@ -1,5 +1,5 @@
 import React from "react";
-import Post from "../components/Post";
+import Posts from "../components/Posts";
 import Navbar from "../components/Navbar";
 import SidebarMenu from "../components/SidebarMenu";
 import WidgetHora from "../components/widgets/WidgetHora";
@@ -15,7 +15,7 @@ const HomePage = () => {
         </div>
 
         <div className="flex-1 px-8 overflow-y-auto">
-          <Post userSeleccionado={"all"} />
+          <Posts userSeleccionado={"all"} />
         </div>
 
         <div className="w-1/4 px-8 overflow-y-auto"></div>

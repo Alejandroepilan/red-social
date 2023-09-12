@@ -42,12 +42,12 @@ const Post = (props) => {
     toggleElement(index);
   };
 
+  props.numPostsUser(posts.length);
+
   useEffect(() => {
     getPosts(props.userSeleccionado).then((res) => {
       setPosts(res.data);
     });
-
-    console.log(posts);
   }, []);
 
   return (
