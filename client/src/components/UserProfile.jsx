@@ -177,7 +177,6 @@ const UserProfile = (props) => {
                   </div>
 
                   <div className="flex flex-colinline-block">
-                    {/*<div>10 Seguidores</div>*/}
                     <div className="hover:underline cursor-pointer">
                       <span className="font-medium">{numSeguidores}</span>
                       <span className="pl-1">Seguidores</span>

@@ -15,23 +15,6 @@ const Post = (props) => {
 
   var avatarUrl = "https://api.multiavatar.com/";
 
-  /*var postsSeleccionados = posts;
-
-  if (props.userSeleccionado) {
-    postsSeleccionados = posts.filter(
-      (post) => post.userId._id === props.userSeleccionado
-    );
-  }*/
-
-  const [elementStates, setElementStates] = useState();
-  //postsSeleccionados.map(() => false)
-
-  const toggleElement = (index) => {
-    const newElementStates = [...elementStates];
-    newElementStates[index] = !newElementStates[index];
-    setElementStates(newElementStates);
-  };
-
   const handleDarLike = (postId) => {
     darLike(postId);
     toggleElement(index);
@@ -104,7 +87,7 @@ const Post = (props) => {
                       <HeartIcon className="ml-1 text-red-500 h-5 w-5" />
                     )}
                   </button>
-                    )*/}
+                )*/}
               </div>
               <div className="text-xs flex items-center">
                 <a className="px-2">•</a>
