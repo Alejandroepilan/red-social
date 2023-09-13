@@ -12,17 +12,20 @@ import { getPosts, createNewPost } from "../api/posts";
 const Post = (props) => {
   const { user } = useAuth();
   const [posts, setPosts] = useState([]);
+  const [liked, setLiked] = useState([]);
 
   var avatarUrl = "https://api.multiavatar.com/";
 
   const handleDarLike = (postId) => {
     darLike(postId);
-    toggleElement(index);
   };
 
   const handleQuitarLike = (postId) => {
     quitarLike(postId);
-    toggleElement(index);
+  };
+
+  const handleLikeButton = () => {
+    setLiked(!liked);
   };
 
   props.numPostsUser(posts.length);
@@ -37,67 +40,53 @@ const Post = (props) => {
     <>
       <div className="text-black">
         {posts.map((post, index) => (
-          <div
-            className="bg-white shadow rounded-2xl p-6 mb-8 ring-1 ring-black ring-opacity-5"
-            key={post._id}
-          >
-            <Link
-              to={`/u/${post.userId.username}`}
-              className="flex hover:underline"
+          <>
+            <div
+              className="bg-white shadow rounded-2xl p-6 mb-8 ring-1 ring-black ring-opacity-5"
+              key={post._id}
             >
-              <div className=" w-10">
-                <img src={avatarUrl + post.userId.username + ".svg"} />
-              </div>
-              <div className=" flex items-center pl-2">
-                <span className="font-medium mr-1">
-                  @{post.userId.username}
-                </span>
-                <ProfileBadges />
-              </div>
-            </Link>
-            <div className="py-8">{post.text}</div>
-            <div className="flex">
+              <Link
+                to={`/u/${post.userId.username}`}
+                className="flex hover:underline"
+              >
+                <div className=" w-10">
+                  <img src={avatarUrl + post.userId.username + ".svg"} />
+                </div>
+                <div className=" flex items-center pl-2">
+                  <span className="font-medium mr-1">
+                    @{post.userId.username}
+                  </span>
+                  <ProfileBadges />
+                </div>
+              </Link>
+              <div className="py-8">{post.text}</div>
               <div className="flex">
-                {post.likes.length}
+                <div className="flex">
+                  {post.likes.length}
 
-                {/*post.likes.some((userId) => userId === user.id) ? (
                   <button
                     onClick={() => {
-                      quitarLike(post._id);
-                      toggleElement(index);
-                      console.log(elementStates);
+                      handleLikeButton(post._id);
                     }}
                   >
-                    {elementStates[index] ? (
-                      <HeartIcon className="ml-1 text-red-500 h-5 w-5 ju" />
-                    ) : (
-                      <HeartIconSolid className="ml-1 text-red-500 h-5 w-5" />
-                    )}
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => {
-                      darLike(post._id);
-                      toggleElement(index);
-                    }}
-                  >
-                    {elementStates[index] ? (
+                    {post.likes.some((userId) => userId === user.id) ? (
                       <HeartIconSolid className="ml-1 text-red-500 h-5 w-5" />
                     ) : (
                       <HeartIcon className="ml-1 text-red-500 h-5 w-5" />
                     )}
                   </button>
-                )*/}
-              </div>
-              <div className="text-xs flex items-center">
-                <a className="px-2">•</a>
-                {formatDistanceToNow(new Date(post.createdAt), {
-                  addSuffix: true,
-                  locale: es,
-                })}
+                </div>
+                <div className="text-xs flex items-center">
+                  <a className="px-2">•</a>
+                  {formatDistanceToNow(new Date(post.createdAt), {
+                    addSuffix: true,
+                    locale: es,
+                  })}
+                </div>
               </div>
             </div>
-          </div>
+            {/*<div className="bg-white shadow rounded-2xl p-6 mb-8 mx-12 ring-1 ring-black ring-opacity-5"></div>*/}
+          </>
         ))}
       </div>
     </>
