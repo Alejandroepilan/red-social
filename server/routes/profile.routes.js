@@ -7,6 +7,7 @@ import {
   checkUsername,
   followUser,
   unfollowUser,
+  searchProfile,
 } from "../controllers/profile.controllers.js";
 
 const router = Router();
@@ -14,6 +15,7 @@ const router = Router();
 router.get("/profile/get/:username", authRequired, getUserProfile);
 router.put("/profile/update/:username", authRequired, updateProfile);
 router.get("/profile/check-username/:username", authRequired, checkUsername);
+router.get("/profile/search/:username", authRequired, searchProfile);
 
 router.put("/follow/:userid", authRequired, followUser);
 router.put("/unfollow/:userid", authRequired, unfollowUser);

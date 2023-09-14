@@ -70,6 +70,21 @@ export const checkUsername = async (req, res) => {
   }
 };
 
+export const searchProfile = async (req, res) => {
+  const usernameReq = req.params.username;
+
+  const regex = new RegExp(`^${usernameReq}`, "i");
+  const filtro = { ["username"]: regex };
+
+  await User.find(filtro)
+    .select("username")
+    .then((res) => {
+      console.log(res);
+    });
+
+  return res.status(200);
+};
+
 export const followUser = async (req, res) => {
   const followerUserId = req.user.id;
   const userId = req.params.userid;

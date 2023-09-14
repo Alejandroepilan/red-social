@@ -8,6 +8,7 @@ const HomePage = () => {
   const [numPosts, setNumPosts] = useState(0);
 
   const getNumPosts = (data) => {
+    setNumPosts(1);
     setNumPosts(data);
   };
 
