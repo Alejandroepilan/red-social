@@ -41,7 +41,7 @@ const Searchbar = () => {
         placeholder="Buscar"
       />
 
-      <div className="absolute mt-44 w-full p-2 bg-white rounded-2xl shadow ring-1 ring-black ring-opacity-5">
+      <div className="absolute hidden mt-44 w-full p-2 bg-white rounded-2xl shadow ring-1 ring-black ring-opacity-5">
         <Link to={"/"}>
           <div className="px-4 py-2 text-sm rounded-xl hover:bg-gray-50">
             Resultado 1

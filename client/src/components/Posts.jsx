@@ -16,16 +16,19 @@ const Post = (props) => {
 
   var avatarUrl = "https://api.multiavatar.com/";
 
-  const handleDarLike = (postId) => {
-    darLike(postId);
-  };
-
-  const handleQuitarLike = (postId) => {
-    quitarLike(postId);
-  };
-
-  const handleLikeButton = () => {
+  const handleLikeButton = (postId) => {
     setLiked(!liked);
+
+    const postLiked = posts.find((post) => post._id === postId);
+
+    if (postLiked.likes.some((userId) => userId === user.id)) {
+      const posicionAEliminar = postLiked.likes.indexOf(user.id);
+      postLiked.likes.splice(posicionAEliminar, 1);
+      quitarLike(postId);
+    } else {
+      postLiked.likes.push(user.id);
+      darLike(postId);
+    }
   };
 
   props.numPostsUser(posts.length);
