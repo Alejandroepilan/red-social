@@ -11,6 +11,7 @@ import { getPosts, createNewPost } from "../api/posts";
 
 const Post = (props) => {
   const { user } = useAuth();
+  const [userProfile, setUserProfile] = useState([]);
   const [posts, setPosts] = useState([]);
   const [liked, setLiked] = useState([]);
 
@@ -64,7 +65,7 @@ const Post = (props) => {
             <div className="py-8">{post.text}</div>
             <div className="flex">
               <div className="flex">
-                {post.likes.length}
+                <span>{post.likes.length}</span>
 
                 <button
                   onClick={() => {

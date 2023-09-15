@@ -165,7 +165,7 @@ const UserProfile = (props) => {
                       @{userProfile.username}
                     </span>
 
-                    <ProfileBadges />
+                    <ProfileBadges user={userProfile._id} />
                   </div>
 
                   <div>
@@ -243,43 +243,6 @@ const UserProfile = (props) => {
       </div>
     </div>
   );
-
-  /*return (
-    <div className="flex h-screen">
-      <Sidebar />
-      <div className="w-5/6 ml-auto">
-        <div className="flex items-end justify-center muro h-44">
-          <div className="translate-y-[50%] w-32 h-32 rounded-full">
-            <img
-              className="ring-[6px] ring-stone-900 rounded-full"
-              src={avatarUrl}
-            />
-          </div>
-        </div>
-
-        <div className="flex flex-col justify-center my-24 text-neutral-200">
-          <span className="flex flex-col items-center justify-center">
-            <div className="font-bold">
-              @{userProfile.username}
-              <FontAwesomeIcon
-                icon={faCircleCheck}
-                className="text-cyan-400 ml-1"
-              />
-            </div>
-            <div className="flex flex-colinline-block mt-4">
-              <div>10 Seguidores</div>
-              <div className="ml-5">
-                {publicacionesDelUsuario.length} Publicaciones
-              </div>
-            </div>
-          </span>
-          <div className="flex justify-center m-24">
-            <Posts userSeleccionado={userProfile._id} />
-          </div>
-        </div>
-      </div>
-    </div>
-  );*/
 };
 
 export default UserProfile;

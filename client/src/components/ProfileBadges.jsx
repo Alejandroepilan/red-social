@@ -7,7 +7,9 @@ import {
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
 
-const ProfileBadges = () => {
+const ProfileBadges = (props) => {
+  //console.log(props.user);
+
   return (
     <>
       <CheckBadgeIcon
