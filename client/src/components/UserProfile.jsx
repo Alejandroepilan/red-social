@@ -30,6 +30,7 @@ const UserProfile = (props) => {
   const [siguiendo, setSiguiendo] = useState(false);
   const [numSeguidores, setNumSeguidores] = useState(0);
   const [numPosts, setNumPosts] = useState(0);
+  const [viendoFotoPerfil, setViendoFotoPerfil] = useState(false);
 
   const getNumPosts = (data) => {
     setNumPosts(data);
@@ -155,7 +156,9 @@ const UserProfile = (props) => {
               <div className="bg-white shadow rounded-2xl p-6 mb-8 ring-1 ring-black ring-opacity-5">
                 <div className="h-48 w-full rounded-2xl muro flex flex-col justify-end">
                   <div className="relative h-20 w-20 rounded-full mt-auto ml-5 top-10 ring-4 ring-white">
-                    <img className="" src={avatarUrl} />
+                    <button className="h-20 w-20 rounded-full hover:bg-red-400">
+                      <img className="" src={avatarUrl} />
+                    </button>
                   </div>
                 </div>
 
