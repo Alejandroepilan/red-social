@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
+import {} from "dotenv/config";
 
 export const connectDB = async () => {
-    try {
-        await mongoose.connect('mongodb+srv://alejandroepilan:7o2inHkfJaVflAb8@pruebas.6cglwzx.mongodb.net/red-social');
-        console.log("DB conectada.")
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    await mongoose.connect(process.env.DB_URI);
+    console.log("DB conectada.");
+  } catch (error) {
+    console.log(error);
+  }
 };
