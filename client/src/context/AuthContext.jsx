@@ -55,6 +55,8 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     async function checkLogin() {
+      console.log("comprobando token...");
+
       const cookies = Cookies.get();
 
       if (!cookies.token) {

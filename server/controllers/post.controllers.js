@@ -23,7 +23,13 @@ export const getPosts = async (req, res) => {
 
   if (userId == "all") {
     const posts = await Post.find().populate("userId", "username");
-    return res.status(200).json(posts);
+
+    // Ordena los posts por fecha de creación (createdAt) de forma descendente (más reciente primero)
+    const postsOrdenados = posts.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
+
+    return res.status(200).json(postsOrdenados);
   } else {
     const posts = await Post.find({ userId: userId }).populate(
       "userId",
